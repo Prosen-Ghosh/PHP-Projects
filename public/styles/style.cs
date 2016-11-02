@@ -4,8 +4,9 @@ footer {
     background-color: black;
     clear: left;
     text-align: center;
-    width: 100%;
+    width: 98%;
     border: 1px solid gray;
+    margin-top: 195px;
 }
 .shadow {
   -webkit-box-shadow: 0 8px 6px -6px black;
@@ -23,6 +24,7 @@ footer {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    width: 100%;
 }
 .buttonColor {
   background-color: #e7e7e7;
@@ -33,3 +35,9 @@ footer {
    background-color: lightgray;
    font-weight: bold;
  }
+ .buttonPosiion {
+    margin-left: 550px;
+    margin-top: 250px;
+    padding: 1em;
+    overflow: hidden;
+}
