@@ -30,7 +30,7 @@ footer {
   background-color: #e7e7e7;
    color: black;
    border-radius: 10px;
- } /* Gray */
+ }
  .buttonColor:hover {
    background-color: lightgray;
    font-weight: bold;
