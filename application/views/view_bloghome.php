@@ -3,10 +3,10 @@
 	<div class="buttonPosiion">
 		<table>
 			<tr>
-				<td><a class="button buttonColor" href="/codesblog/register">Get Started</a></td>
+				<td><a class="button buttonColor" href="/coder/register">Get Started</a></td>
 			</tr>
 			<tr>
-				<td><a class="button buttonColor" href="/codesblog/login">Log In</a></td>
+				<td><a class="button buttonColor" href="/coder/login">Log In</a></td>
 			</tr>
 		</table>
 	</div>

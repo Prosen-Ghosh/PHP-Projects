@@ -42,10 +42,10 @@
     overflow: hidden;
 }
 .homeImage {
-  background-image: url('/codesblog/public/img/homebg.jpg');
+  background-image: url('/coder/public/img/homebg.jpg');
 }
 .logo {
-  background-image: url('/codesblog/public/img/logo.PNG');
+  background-image: url('/coder/public/img/logo.PNG');
 }
 .homeSpace {
   padding: 1em;
