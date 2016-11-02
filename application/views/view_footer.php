@@ -1,3 +1,3 @@
   </body>
-  <div><footer>Copyright © Prosen Ghosh</footer></div>
+  <div class="footer">Copyright © Prosen Ghosh</div>
 </html>

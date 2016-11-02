@@ -1,4 +1,4 @@
-footer {
+.footer {
     padding: 1em;
     color: white;
     background-color: black;
@@ -6,7 +6,7 @@ footer {
     text-align: center;
     width: 98%;
     border: 1px solid gray;
-    margin-top: 195px;
+    margin-top: 0px;
 }
 .shadow {
   -webkit-box-shadow: 0 8px 6px -6px black;
@@ -40,4 +40,20 @@ footer {
     margin-top: 250px;
     padding: 1em;
     overflow: hidden;
+}
+.homeImage {
+  background-image: url('/codesblog/public/img/homebg.jpg');
+}
+.logo {
+  background-image: url('/codesblog/public/img/logo.PNG');
+}
+.homeSpace {
+  padding: 1em;
+  overflow: hidden;
+  height: 580px;
+}
+.logoSize {
+  height: 200px;
+  width: 220px;
+  background-repeat: no-repeat;
 }
