@@ -74,8 +74,10 @@ body{
     background-color: #f2f2f2;
 }
 
-p.error{
+.error{
     color:red;
+    font-weight: bold;
+    font-family: arial;
 }
 
 .register {
