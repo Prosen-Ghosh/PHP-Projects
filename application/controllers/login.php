@@ -9,12 +9,21 @@ class Login extends CI_Controller {
     if($this->input->post('submit')){
 
       if($this->form_validation->run('login')){
-        $user = $this->usersmodel->getUser($this->input->post('userName'));
+        $user = $this->usersmodel->getUser($this->input->post('userName'),$this->input->post('password'));
+        if(!isset($user['username'])){
+          $data['title'] = 'Login';
+          $data['errorMsg'] = 'Check Your User Name And Password.';
+          $this->load->view('view_header',$data);
+          $this->load->view('view_login',$data);
+          $this->load->view('view_footer');
+          return;
+        }
+        $this->session->set_userdata('username',$user['username']);
         if(strtolower($user['category']) === 'user' && strtolower($user['status']) === "ok"){
           redirect('http://localhost/coder/userhome');
         }
         else if(strtolower($user['category']) === 'admin' && strtolower($user['status']) === "ok"){
-          redirect('http://localhost/coder/userhome/');
+          redirect('http://localhost/coder/adminhome');
         }
         /*$data['title'] = 'Login';
         $this->load->view('view_header',$data);
@@ -23,15 +32,17 @@ class Login extends CI_Controller {
       }
       else {
         $data['title'] = 'Login';
+        $data['errorMsg'] = '';
         $this->load->view('view_header',$data);
-        $this->load->view('view_login');
+        $this->load->view('view_login',$data);
         $this->load->view('view_footer');
       }
     }
     else{
       $data['title'] = 'Login';
+      $data['errorMsg'] = '';
       $this->load->view('view_header',$data);
-      $this->load->view('view_login');
+      $this->load->view('view_login',$data);
       $this->load->view('view_footer');
     }
   }

@@ -1,1 +1,1 @@
-<h1>User HOme</h1>
+<h1>Welcome <?php echo $this->session->userdata('username');?></h1>

@@ -26,6 +26,10 @@
         </tr>
         <tr>
           <td></td>
+          <td class="error"><?php echo $errorMsg;?></td>
+        </tr>
+        <tr>
+          <td></td>
           <td><input type="submit" name="submit" value="Log In"></td>
         </tr>
       </table>
