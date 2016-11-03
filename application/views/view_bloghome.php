@@ -4,7 +4,7 @@
 	<nav>
 		<ul style="width: 225px;">
 			<li><a class="active" href="/coder/">Home</a></li>
-			<li><a href="#news">Posts</a></li>
+			<li><a href="#post">Posts</a></li>
 		</ul>
 	</nav>
 </div>
