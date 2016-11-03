@@ -53,10 +53,11 @@
   height: 580px;
 }
 .logoSize {
-  height: 130px;
-  width: 150px;
+  height: 110px;
+  width: 130px;
   background-repeat: no-repeat;
   background-color: #f2f2f2;
+  margin-top: 0px;
 }
 body{
   background-color: #f2f2f2;
@@ -66,6 +67,10 @@ p.error{
 }
 .register {
   margin-top: 0px;
+  border-radius: 5px;
+  background-color: red;/*#f2f2f2;*/
+  padding: 20px;
+  margin-top:0px;
 }
 input[type=text], select {
     width: 300px;
@@ -101,12 +106,7 @@ input[type=submit]:hover {
     background-color: #45a049;
 }
 
-div.register {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-    margin-top:0px;
-}
+
 .title {
   font-style: italic;
   font-family: arial;
