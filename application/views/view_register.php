@@ -1,4 +1,14 @@
-<div class="logo logoSize" ></div>
+<div class="header">
+<div class="logo logoSize"></div>
+<div class="position">
+	<nav>
+		<ul style="width: 225px;">
+			<li><a class="active" href="/coder/">Home</a></li>
+			<li><a href="#news">Posts</a></li>
+		</ul>
+	</nav>
+</div>
+</div>
 <center>
   <div class="register">
     <h3> Register Your Self</h3>

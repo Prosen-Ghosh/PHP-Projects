@@ -8,11 +8,7 @@
     border: 1px solid gray;
     margin-top: 0px;
 }
-.shadow {
-  -webkit-box-shadow: 0 8px 6px -6px black;
-       -moz-box-shadow: 0 8px 6px -6px black;
-            box-shadow: 0 8px 6px -6px black;
-}
+
 .button {
     background-color: #4CAF50; /* Green */
     border: none;
@@ -26,52 +22,70 @@
     cursor: pointer;
     width: 100%;
 }
+
 .buttonColor {
-  background-color: #e7e7e7;
-   color: black;
-   border-radius: 10px;
+    background-color: #e7e7e7;
+    color: black;
+    border-radius: 10px;
  }
- .buttonColor:hover {
-   background-color: lightgray;
-   font-weight: bold;
- }
- .buttonPosiion {
+
+.buttonColor:hover {
+    background-color: lightgray;
+    font-weight: bold;
+}
+
+.buttonPosiion {
     margin-left: 550px;
     margin-top: 250px;
     padding: 1em;
     overflow: hidden;
 }
+
 .homeImage {
-  background-image: url('/coder/public/img/homebg.jpg');
+    background-image: url('/coder/public/img/homebg.jpg');
 }
+
 .logo {
-  background-image: url('/coder/public/img/logo.PNG');
+    background-image: url('/coder/public/img/logo.PNG');
 }
+
 .homeSpace {
-  padding: 1em;
-  overflow: hidden;
-  height: 580px;
+    padding: 1em;
+    overflow: hidden;
+    height: 580px;
+    margin-top: -90px;
+    background-color: #f2f2f2;
+    opacity: 0.8;
+    position: relative;
 }
+
 .logoSize {
-  height: 110px;
-  width: 130px;
-  background-repeat: no-repeat;
-  background-color: #f2f2f2;
-  margin-top: 0px;
+    height: 130px;
+    width: 140px;
+    background-repeat: no-repeat;
+    background-color: #f2f2f2;
+    margin-top: 0px;
+    position: relative;
+    left:0px;
+    top: 0px;
 }
+
 body{
-  background-color: #f2f2f2;
+    background-color: #f2f2f2;
 }
+
 p.error{
-  color:red;
+    color:red;
 }
+
 .register {
-  margin-top: 0px;
-  border-radius: 5px;
-  background-color: red;/*#f2f2f2;*/
-  padding: 20px;
-  margin-top:0px;
+    margin-top: 0px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin-top:0px;
 }
+
 input[type=text], select {
     width: 300px;
     padding: 12px 20px;
@@ -81,6 +95,7 @@ input[type=text], select {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
 input[type=password], select {
     width: 100%;
     padding: 12px 20px;
@@ -108,7 +123,7 @@ input[type=submit]:hover {
 
 
 .title {
-  font-style: italic;
-  font-family: arial;
-  font-weight: bold;
+    font-style: italic;
+    font-family: arial;
+    font-weight: bold;
 }
