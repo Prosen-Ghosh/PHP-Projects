@@ -31,17 +31,12 @@ $config = array(
     array(
       'field' => 'password',
       'label' => 'Password',
-      'rules' => 'trim|required|min_length[6]'
+      'rules' => 'trim|required|min_length[6]|callback_checkUpperCaseAndLowerCase'
     ),
     array(
       'field' => 'confrimPassword',
       'label' => 'Confrim Password',
       'rules' => 'trim|required|min_length[6]|matches[password]'
-    ),
-    array(
-      'field' => 'password',
-      'label' => 'Password',
-      'rules' => 'trim|required'
     )
   )
 );

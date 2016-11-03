@@ -37,7 +37,7 @@
         <tr>
           <td class="title">Confrim Password: </td>
           <td><input type="password" name="confrimPassword" value="" placeholder="Re-Enter Password"></td>
-          <td class="error"<?php echo form_error('confrimPassword');?>></td>
+          <td class="error"<?php echo form_error('confrimPassword');?></td>
         </tr>
         <tr>
           <td></td>

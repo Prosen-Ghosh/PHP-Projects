@@ -23,4 +23,26 @@ class Register extends CI_Controller {
       $this->load->view('view_footer');
     }
   }
+  public function checkUpperCaseAndLowerCase($str){
+    $len = strlen($str);
+    $upper = False;
+    $lower = False;
+    for($i = 0; $i < $len; $i++){
+      if($str[$i] >= 'A' && $str[$i] <= 'Z')$upper = True;
+      if($str[$i] >= 'a' && $str[$i] <= 'z')$lower = True;
+    }
+    if($upper){
+      if($lower){
+        return True;
+      }
+      else{
+        $this->form_validation->set_message('checkUpperCaseAndLowerCase','Password Must Contain At Least 1 Lowercase character.');
+        return False;
+      }
+    }
+    else {
+      $this->form_validation->set_message('checkUpperCaseAndLowerCase','Password Must Contain At Least 1 Uppercase character');
+      return False;
+    }
+  }
 }
