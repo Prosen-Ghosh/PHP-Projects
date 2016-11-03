@@ -1,6 +1,7 @@
 <div class="logo logoSize" ></div>
 <center>
   <div class="register">
+    <h3> Register Your Self</h3>
     <form action="" method="post">
       <table>
         <tr>
@@ -34,5 +35,6 @@
         </tr>
       </table>
     </form>
+    <label class="title">I All Ready have An <a href="/coder/login">Account</a></label>
   </div>
 </center>

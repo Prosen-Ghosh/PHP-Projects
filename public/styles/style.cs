@@ -65,7 +65,7 @@ p.error{
   color:red;
 }
 .register {
-  margin-top: 60px;
+  margin-top: 0px;
 }
 input[type=text], select {
     width: 300px;
@@ -105,8 +105,9 @@ div.register {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
+    margin-top:0px;
 }
-td.title {
+.title {
   font-style: italic;
   font-family: arial;
   font-weight: bold;
