@@ -57,6 +57,6 @@ class Posts extends CI_Controller {
 
   public function mypost(){
     if(!$this->session->userdata('username'))redirect('http://localhost/coder/login');
-    //kal ai khantheke suru..
+    echo "kal ai khantheke suru..";
   }
 }

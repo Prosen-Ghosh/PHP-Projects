@@ -6,7 +6,7 @@
 			<li><a href="/coder/">Home</a></li>
 			<li><a href="/coder/posts">Posts</a></li>
       <li><a href="/coder/newpost">New Post</a></li>
-			<li><a href="/coder/post/mypost">My Post</a></li>
+			<li><a href="/coder/posts/mypost">My Post</a></li>
       <li style='float:right'>
         <select name="userinfo" onchange="location = this.value">
           <option value=''><a class="active" href=""><?php echo ucfirst($this->session->userdata('username'));?></a></option>
