@@ -38,5 +38,22 @@ $config = array(
       'label' => 'Confrim Password',
       'rules' => 'trim|required|min_length[6]|matches[password]'
     )
+  ),
+  'postField' => array(
+    array(
+      'field' => 'posttitle',
+      'label' => 'Post Title',
+      'rules' => 'trim|required'
+    ),
+    array(
+      'field' => 'post',
+      'label' => 'Post',
+      'rules' => 'trim|required|min_length[60]'
+    ),
+    array(
+      'field' => 'tag',
+      'label' => 'Tag',
+      'rules' => 'trim|required'
+    )
   )
 );
