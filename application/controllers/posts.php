@@ -5,6 +5,7 @@ class Posts extends CI_Controller {
     parent::__construct();
     $this->load->database();
     $this->load->model('postmodel');
+    $this->load->model('usersmodel');
   }
 
   public function index(){
@@ -30,11 +31,27 @@ class Posts extends CI_Controller {
     $res = $this->postmodel->getPost($id);
 
     if($res['postid'] == $id){
-      $data['postdata'] = $res;
+      $this->load->model('usersmodel');
+      $username = $res['username'];
+      $userinfo = $this->usersmodel->getUserInfo($username);
+      $fbURL = $userinfo['url'];
+      $res['post'] = str_replace('<','&lt',$res['post']);
+      $res['post'] = str_replace('>','&gt',$res['post']);
+
+      $str = "<center><h1>Title: ".$res['posttitle']."</h1></center><hr><br><br>"
+      ."<div style='margin-left:120px; font-size: 22px; line-height: 25px padding:50px;'><pre>".$res['post']."</pre></div><br><br><hr>"
+      ."<div style='margin-top:50px; padding:30px;'><b>Author: ".$userinfo['name']."</b>"
+      ."<strong><a style='margin-left:20px; text-decoration: none; color: blue;' href='$fbURL'>Facebook Profile</a></strong></div><br><br>";
+
+      $data['postdata'] = $str;
       $data['title'] = 'Posts';
       $this->load->view('view_header',$data);
       $this->load->view('view_specificpost',$data);
       $this->load->view('view_footer');
+    }
+    else {
+      echo "<script>alert('No Data Found.ss')</script>";
+      redirect('http://localhost/coder/posts','refresh');
     }
   }
 }
