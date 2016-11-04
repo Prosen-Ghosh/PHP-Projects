@@ -8,6 +8,12 @@ class Postmodel extends CI_Controller {
     $tag = $postdata['tag'];
     $sql = "INSERT INTO `post`(`posttitle`, `post`, `date`, `point`, `tag`) VALUES ('$posttitle','$post','$date',0,'$tag')";
     $this->load->database();
+    $this->db->query($sql);
+  }
+  public function getAllPost(){
+    $sql = "SELECT * FROM `post`";
+    $this->load->database();
     $res = $this->db->query($sql);
+    return $res->result_array();
   }
 }

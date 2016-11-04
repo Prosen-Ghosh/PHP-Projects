@@ -9,7 +9,7 @@
         <td>Post: </td>
       </tr>
       <tr>
-        <td ><textarea rows='35' cols='150'  name="post" value='<?php echo set_value('post');?>'></textarea></td>
+        <td ><pre><textarea rows='35' cols='150'  name="post" value='<?php echo set_value('post');?>'></textarea></pre></td>
         <td style="color:red;"><?php echo form_error('post');?></td>
       </tr>
       <tr>

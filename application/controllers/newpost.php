@@ -15,7 +15,7 @@ class Newpost extends CI_Controller {
       $this->load->view('view_newpost');
       $this->load->view('view_footer');
     }
-    else{
+    else {
       if($this->form_validation->run('postField')){
         $postdata = array(
           'posttitle' => $this->input->post('posttitle'),
@@ -30,7 +30,7 @@ class Newpost extends CI_Controller {
 
         redirect('http://localhost/coder/posts','refresh');
       }
-      else{
+      else {
         $data['title'] = 'New Post';
         $this->load->view('view_header',$data);
         $this->load->view('view_newpost');
