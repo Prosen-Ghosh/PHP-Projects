@@ -6,4 +6,13 @@ class Usersmodel extends CI_Model {
     $res = $this->db->query($sql);
     return $res->row_array();
   }
+  public function createNewUser($user){
+    $uname = $user['userName'];
+    $name = $user['name'];
+    $email = $user['email'];
+    $pass = $user['password'];
+    $sql = "INSERT INTO `users`(`category`, `username`, `name`, `email`, `password`, `address`, `url`, `status`, `picture`, `country`, `city`) VALUES ('USER','$uname','$name','$email','$pass','','','OK','','','')";
+    $this->load->database();
+    $this->db->query($sql);
+  }
 }

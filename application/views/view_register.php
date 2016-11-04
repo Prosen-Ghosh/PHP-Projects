@@ -16,27 +16,27 @@
       <table>
         <tr>
           <td class="title">Name: </td>
-          <td><input type="text" name="name" value="" placeholder="Enter Your Full Name"></td>
+          <td><input type="text" name="name" value="<?php echo set_value('name');?>" placeholder="Enter Your Full Name"></td>
           <td class="error"><?php echo form_error('name');?></td>
         </tr>
         <tr>
           <td class="title">User Name: </td>
-          <td><input type="text" name="userName" value="" placeholder="Enter a Unique User Name"></td>
+          <td><input type="text" name="userName" value="<?php echo set_value('userName');?>" placeholder="Enter a Unique User Name"></td>
           <td class="error"><?php echo form_error('userName');?></td>
         </tr>
         <tr>
           <td class="title">Email: </td>
-          <td><input type="text" name="email" value="" placeholder="Enter Email: example@something.com"></td>
+          <td><input type="text" name="email" value="<?php echo set_value('email');?>" placeholder="Enter Email: example@something.com"></td>
           <td class="error"><?php echo form_error('email');?></td>
         </tr>
         <tr>
           <td class="title">Password: </td>
-          <td><input type="password" name="password" value="" placeholder="Enter Password"></td>
+          <td><input type="password" name="password" value="<?php echo set_value('password');?>" placeholder="Enter Password"></td>
           <td class="error"><?php echo form_error('password');?></td>
         </tr>
         <tr>
           <td class="title">Confrim Password: </td>
-          <td><input type="password" name="confrimPassword" value="" placeholder="Re-Enter Password"></td>
+          <td><input type="password" name="confrimPassword" value="<?php echo set_value('confrimPassword');?>" placeholder="Re-Enter Password"></td>
           <td class="error"<?php echo form_error('confrimPassword');?></td>
         </tr>
         <tr>

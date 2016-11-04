@@ -1,6 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Register extends CI_Controller {
+  public function __construct(){
+    parent::__construct();
+    $this->load->database();
+    $this->load->model('usersmodel');
+  }
+
   public function index(){
     if(!$this->input->post('submit')){
       $data['title'] = 'Register';
@@ -10,11 +16,18 @@ class Register extends CI_Controller {
     }
     else{
       if($this->form_validation->run('signup')){
-        $data['title'] = 'Login';
-        $data['errorMsg'] = '';
-        $this->load->view('view_header',$data);
-        $this->load->view('view_login',$data);
-        $this->load->view('view_footer');
+        $user = array(
+          'name' => $this->input->post('name'),
+          'userName' => $this->input->post('userName'),
+          'email' => $this->input->post('email'),
+          'password' => $this->input->post('password')
+        );
+        $this->usersmodel->createNewUser($user);
+        echo "<script>
+        alert('Your Registraton Successfull. Go To Login Page To Login.');
+        </script>";
+
+        redirect('http://localhost/coder/login','refresh');
       }
       else{
         $data['title'] = 'Register';
