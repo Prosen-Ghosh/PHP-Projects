@@ -2,11 +2,18 @@
 
 class Register extends CI_Controller {
   public function index(){
-    if($this->input->post('submit')){
-      if($this->form_validation->run('signup') != FALSE){
-        $data['title'] = 'Register';
+    if(!$this->input->post('submit')){
+      $data['title'] = 'Register';
+      $this->load->view('view_header',$data);
+      $this->load->view('view_register');
+      $this->load->view('view_footer');
+    }
+    else{
+      if($this->form_validation->run('signup')){
+        $data['title'] = 'Login';
+        $data['errorMsg'] = '';
         $this->load->view('view_header',$data);
-        $this->load->view('view_register');
+        $this->load->view('view_login',$data);
         $this->load->view('view_footer');
       }
       else{
@@ -15,12 +22,6 @@ class Register extends CI_Controller {
         $this->load->view('view_register');
         $this->load->view('view_footer');
       }
-    }
-    else{
-      $data['title'] = 'Register';
-      $this->load->view('view_header',$data);
-      $this->load->view('view_register');
-      $this->load->view('view_footer');
     }
   }
   public function checkUpperCaseAndLowerCase($str){

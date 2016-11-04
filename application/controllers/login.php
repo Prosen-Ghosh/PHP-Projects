@@ -6,8 +6,14 @@ class Login extends CI_Controller {
     $this->load->model('usersmodel');
   }
   public function index(){
-    if($this->input->post('submit')){
-
+    if(!$this->input->post('submit')){
+      $data['title'] = 'Login';
+      $data['errorMsg'] = '';
+      $this->load->view('view_header',$data);
+      $this->load->view('view_login',$data);
+      $this->load->view('view_footer');
+    }
+    else {
       if($this->form_validation->run('login')){
         $user = $this->usersmodel->getUser($this->input->post('userName'),$this->input->post('password'));
         if(!isset($user['username'])){
@@ -25,10 +31,7 @@ class Login extends CI_Controller {
         else if(strtolower($user['category']) === 'admin' && strtolower($user['status']) === "ok"){
           redirect('http://localhost/coder/adminhome');
         }
-        /*$data['title'] = 'Login';
-        $this->load->view('view_header',$data);
-        $this->load->view('view_login');
-        $this->load->view('view_footer');*/
+        else redirect('http://localhost/coder/blockpage');
       }
       else {
         $data['title'] = 'Login';
@@ -37,13 +40,6 @@ class Login extends CI_Controller {
         $this->load->view('view_login',$data);
         $this->load->view('view_footer');
       }
-    }
-    else{
-      $data['title'] = 'Login';
-      $data['errorMsg'] = '';
-      $this->load->view('view_header',$data);
-      $this->load->view('view_login',$data);
-      $this->load->view('view_footer');
     }
   }
 }
