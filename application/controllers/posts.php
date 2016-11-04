@@ -54,4 +54,9 @@ class Posts extends CI_Controller {
       redirect('http://localhost/coder/posts','refresh');
     }
   }
+
+  public function mypost(){
+    if(!$this->session->userdata('username'))redirect('http://localhost/coder/login');
+    //kal ai khantheke suru..
+  }
 }
