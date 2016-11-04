@@ -1,2 +1,2 @@
-<h1>All Post Will Be Here...</h1>
-<?php echo $tableData;?>
+<center><h1>All Post.</h1></center><hr>
+<?php echo $tableData;

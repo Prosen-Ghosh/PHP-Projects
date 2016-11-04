@@ -15,7 +15,8 @@ class Posts extends CI_Controller {
     foreach ($res as $r) {
       $r['post'] = str_replace('<','&lt',$r['post']);
       $r['post'] = str_replace('>','&gt',$r['post']);
-      $str.= $r['posttitle']."<div class='postDiv'><a class='postATag' href='/coder/'><pre>".$r['post']."</pre></a></div><hr>";
+      $id = $r['postid'];
+      $str.= $r['posttitle']."<div class='postDiv'><a class='postATag' href='/coder/posts/showSpecificPost/$id'><pre>".$r['post']."</pre></a></div><hr>";
       //  ."<div ><a style='margin: 10px;' href=''>Edit</a></td><td> <a style='margin: 10px;' href=''>Delete</a></div>"
     }
     $data['tableData'] = $str;
@@ -23,5 +24,17 @@ class Posts extends CI_Controller {
     $this->load->view('view_header',$data);
     $this->load->view('view_posts',$data);
     $this->load->view('view_footer');
+  }
+
+  public function showSpecificPost($id){
+    $res = $this->postmodel->getPost($id);
+
+    if($res['postid'] == $id){
+      $data['postdata'] = $res;
+      $data['title'] = 'Posts';
+      $this->load->view('view_header',$data);
+      $this->load->view('view_specificpost',$data);
+      $this->load->view('view_footer');
+    }
   }
 }

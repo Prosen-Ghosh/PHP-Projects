@@ -16,4 +16,10 @@ class Postmodel extends CI_Controller {
     $res = $this->db->query($sql);
     return $res->result_array();
   }
+  public function getPost($id){
+    $sql = "SELECT * FROM `post` WHERE postid = $id";
+    $this->load->database();
+    $res = $this->db->query($sql);
+    return $res->row_array();
+  }
 }

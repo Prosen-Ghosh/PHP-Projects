@@ -4,7 +4,7 @@
 	<nav>
 		<ul>
 			<li><a href="/coder/">Home</a></li>
-			<li><a href="#post">Posts</a></li>
+			<li><a href="/coder/posts">Posts</a></li>
       <li><a href="/coder/newpost">New Post</a></li>
       <li style='float:right'>
         <select name="userinfo" onchange="location = this.value">
