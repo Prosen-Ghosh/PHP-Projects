@@ -51,7 +51,7 @@ class Posts extends CI_Controller {
       $this->load->view('view_footer');
     }
     else {
-      echo "<script>alert('No Data Found.ss')</script>";
+      echo "<script>alert('No Data Found.')</script>";
       redirect('http://localhost/coder/posts','refresh');
     }
   }
@@ -131,8 +131,34 @@ class Posts extends CI_Controller {
       $this->load->view('view_footer');
     }
     else {
-      echo "<script>alert('No Data Found.ss')</script>";
-      redirect('http://localhost/coder/posts','refresh');
+      echo "<script>alert('No Data Found.')</script>";
+      redirect('http://localhost/coder/posts/mypost','refresh');
+    }
+  }
+  public function editPost($postid){
+    if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
+    if(!$this->input->post('submit')){
+      $data['title'] = 'Edit Posts';
+      $this->load->view('view_header',$data);
+      $this->load->view('view_editpost',$data);
+      $this->load->view('view_footer');
+    }
+    else {
+      if($this->form_validation->run('postField')){
+        $res = $this->postmodel->getPost($postid);
+        $data['postdata'] = $res;
+        $data['style'] = $style;
+        $data['title'] = 'Posts';
+        $this->load->view('view_header',$data);
+        $this->load->view('view_editpost',$data);
+        $this->load->view('view_footer');
+      }
+      else {
+        $data['title'] = 'Edit Posts';
+        $this->load->view('view_header',$data);
+        $this->load->view('view_editpost',$data);
+        $this->load->view('view_footer');
+      }
     }
   }
 }
