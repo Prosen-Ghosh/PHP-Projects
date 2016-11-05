@@ -9,4 +9,4 @@
 	</nav>
 </div>
 </div>
-<?php echo $postdata?>
+<?php echo $style; echo $postdata;?>
