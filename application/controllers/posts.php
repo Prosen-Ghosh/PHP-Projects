@@ -57,6 +57,35 @@ class Posts extends CI_Controller {
 
   public function mypost(){
     if(!$this->session->userdata('username'))redirect('http://localhost/coder/login');
-    echo "kal ai khantheke suru..";
+
+      $style = "<style>
+      .button {
+          display: block;
+          width: 80px;
+          height: 15px;
+          background: #4E9CAF;
+          padding: 10px;
+          text-align: center;
+          border-radius: 5px;
+          color: white;
+          font-weight: bold;
+      }
+      </style>";
+      $username = $this->session->userdata('username');
+      $res = $this->postmodel->getAllUserPost($username);
+      $str = "";
+      foreach ($res as $r) {
+        $r['post'] = str_replace('<','&lt',$r['post']);
+        $r['post'] = str_replace('>','&gt',$r['post']);
+        $id = $r['postid'];
+        $str.= "<b>".$r['posttitle']."</b>"."<div class='postDiv'><a class='postATag' href='/coder/posts/showSpecificPost/$id'><pre>".$r['post']."</pre></a></div><br>"
+          ."<a class='button' style='float:left;' href=''>Edit</a> <a style='float:left;' class='button' href=''>Delete</a> <br><hr><br>";
+      }
+      $data['tableData'] = $str;
+      $data['style'] = $style;
+      $data['title'] = 'Posts';
+      $this->load->view('view_header',$data);
+      $this->load->view('view_userpost',$data);
+      $this->load->view('view_footer');
   }
 }

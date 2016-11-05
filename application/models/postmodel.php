@@ -23,7 +23,7 @@ class Postmodel extends CI_Model {
     $res = $this->db->query($sql);
     return $res->row_array();
   }
-  public function getUserPost($username){
+  public function getAllUserPost($username){
     $sql = "SELECT * FROM `post` WHERE username = '$username'";
     $this->load->database();
     $res = $this->db->query($sql);
