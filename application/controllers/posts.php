@@ -121,7 +121,7 @@ class Posts extends CI_Controller {
       ."<div style='margin-left:120px; font-size: 22px; line-height: 25px padding:50px;'><pre>".$res['post']."</pre></div><br><br><hr>"
       ."<div style='margin-top:50px; padding:30px;'><b>Author: ".$userinfo['name']."</b>"
       ."<strong><a style='margin-left:20px; text-decoration: none; color: blue;' href='$fbURL'>Facebook Profile</a></strong></div><br><br>"
-      ."<a class='button' style='float:left;' href=''>Edit</a> <a style='float:left;' class='button' href=''>Delete</a> <br><hr><br>";
+      ."<a class='button' style='float:left;' href='/coder/posts/editPost/$id'>Edit</a> <a style='float:left;' class='button' href=''>Delete</a> <br><hr><br>";
 
       $data['postdata'] = $str;
       $data['style'] = $style;
@@ -177,5 +177,9 @@ class Posts extends CI_Controller {
         $this->load->view('view_footer');
       }
     }
+  }
+
+  public function deletePost($postid){
+    if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
   }
 }
