@@ -29,4 +29,13 @@ class Postmodel extends CI_Model {
     $res = $this->db->query($sql);
     return $res->result_array();
   }
+  public function updatePost($postdata,$res){
+    $id = $res['postid'];
+    $posttitle = $postdata['posttitle'];
+    $post = $postdata['post'];
+    $tag = $postdata['tag'];
+    $sql = "UPDATE `post` SET `posttitle`='$id',`post`='$post', `tag`='$tag' WHERE `postid` = $id";
+    $this->load->database();
+    $this->db->query($sql);
+  }
 }

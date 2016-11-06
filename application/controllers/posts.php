@@ -80,7 +80,7 @@ class Posts extends CI_Controller {
         $r['post'] = str_replace('>','&gt',$r['post']);
         $id = $r['postid'];
         $str.= "<b>".$r['posttitle']."</b>"."<div class='postDiv'><a class='postATag' href='/coder/posts/showUserSpecificPost/$id'><pre>".$r['post']."</pre></a></div><br>"
-          ."<a class='button' style='float:left;' href=''>Edit</a> <a style='float:left;' class='button' href=''>Delete</a> <br><hr><br>";
+          ."<a class='button' style='float:left;' href='/coder/posts/editPost/$id'>Edit</a> <a style='float:left;' class='button' href=''>Delete</a> <br><hr><br>";
       }
       $data['tableData'] = $str;
       $data['style'] = $style;
@@ -137,7 +137,23 @@ class Posts extends CI_Controller {
   }
   public function editPost($postid){
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
+    $res = $this->postmodel->getPost($postid);
     if(!$this->input->post('submit')){
+      $style = "<style>
+      .button {
+          display: block;
+          width: 80px;
+          height: 15px;
+          background: #4E9CAF;
+          padding: 10px;
+          text-align: center;
+          border-radius: 5px;
+          color: white;
+          font-weight: bold;
+      }
+      </style>";
+      $data['postdata'] = $res;
+      $data['style'] = $style;
       $data['title'] = 'Edit Posts';
       $this->load->view('view_header',$data);
       $this->load->view('view_editpost',$data);
@@ -145,13 +161,14 @@ class Posts extends CI_Controller {
     }
     else {
       if($this->form_validation->run('postField')){
-        $res = $this->postmodel->getPost($postid);
-        $data['postdata'] = $res;
-        $data['style'] = $style;
-        $data['title'] = 'Posts';
-        $this->load->view('view_header',$data);
-        $this->load->view('view_editpost',$data);
-        $this->load->view('view_footer');
+        $postdata = array(
+          'posttitle' => $this->input->post('posttitle'),
+          'post' => $this->input->post('post'),
+          'tag' => $this->input->post('tag')
+        );
+        $this->postmodel->updatePost($postdata,$res);
+        echo "<script>alert('Post updated successfully.');</script>";
+        redirect('http://localhost/coder/posts/mypost','refresh');
       }
       else {
         $data['title'] = 'Edit Posts';
