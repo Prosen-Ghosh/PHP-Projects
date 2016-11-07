@@ -21,4 +21,16 @@ class Usersmodel extends CI_Model {
     $res = $this->db->query($sql);
     return $res->row_array();
   }
+  public function getAllUser(){
+    $sql = "SELECT * FROM `users` WHERE `category` NOT LIKE 'admin' AND `status` NOT LIKE 'block'";
+    $this->load->database();
+    $res = $this->db->query($sql);
+    return $res->result_array();
+  }
+
+  public function _blockUser($uname){
+    $sql = "UPDATE `users` SET ,`status`='BLOCK' WHERE `username` = $uname";
+    $this->load->database();
+    $this->db->query($sql);
+  }
 }

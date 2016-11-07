@@ -5,7 +5,7 @@
 		<ul>
 			<li><a href="/coder/">Home</a></li>
 			<li><a href="/coder/posts/userPosts">Posts</a></li>
-      <li><a href="/coder/newpost">Users</a></li>
+      <li><a href="/coder/adminhome/getAllUsers">Users</a></li>
       <li><a href="/coder/newpost">Block Users</a></li>
       <li><a href="/coder/posts/userBlockedPosts">Block Posts</a></li>
       <li style='float:right'>
