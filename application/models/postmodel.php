@@ -12,7 +12,7 @@ class Postmodel extends CI_Model {
     $this->db->query($sql);
   }
   public function getAllPost(){
-    $sql = "SELECT * FROM `post`";
+    $sql = "SELECT * FROM `post` WHERE `state` NOT LIKE 'BLOCK'";
     $this->load->database();
     $res = $this->db->query($sql);
     return $res->result_array();
@@ -48,5 +48,16 @@ class Postmodel extends CI_Model {
     $sql = "UPDATE `post` SET `state`='BLOCK' WHERE `postid` = $postId";
     $this->load->database();
     $this->db->query($sql);
+  }
+  public function unBlockUserPost($postId){
+    $sql = "UPDATE `post` SET `state`='OK' WHERE `postid` = $postId";
+    $this->load->database();
+    $this->db->query($sql);
+  }
+  public function getAllBlockedPost(){
+    $sql = "SELECT * FROM `post` WHERE `state` LIKE 'BLOCK'";
+    $this->load->database();
+    $res = $this->db->query($sql);
+    return $res->result_array();
   }
 }
