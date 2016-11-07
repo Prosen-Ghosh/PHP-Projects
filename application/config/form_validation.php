@@ -55,5 +55,12 @@ $config = array(
       'label' => 'Tag',
       'rules' => 'trim|required'
     )
+  ),
+  'commentField' => array(
+    array(
+      'field' => 'comment',
+      'label' => 'Comment Text',
+      'rules' => 'trim|required'
+    )
   )
 );
