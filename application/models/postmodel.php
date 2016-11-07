@@ -43,4 +43,10 @@ class Postmodel extends CI_Model {
     $this->load->database();
     $this->db->query($sql);
   }
+
+  public function blockUserPost($postId){
+    $sql = "UPDATE `post` SET `state`='BLOCK' WHERE `postid` = $postId";
+    $this->load->database();
+    $this->db->query($sql);
+  }
 }
