@@ -80,7 +80,8 @@ class Posts extends CI_Controller {
         $r['post'] = str_replace('>','&gt',$r['post']);
         $id = $r['postid'];
         $str.= "<b>".$r['posttitle']."</b>"."<div class='postDiv'><a class='postATag' href='/coder/posts/showUserSpecificPost/$id'><pre>".$r['post']."</pre></a></div><br>"
-          ."<a class='button' style='float:left;' href='/coder/posts/editPost/$id'>Edit</a> <a style='float:left;' class='button' href=''>Delete</a> <br><hr><br>";
+          ."<a class='button' style='float:left;' href='/coder/posts/editPost/$id'>Edit</a>"
+          ." <a style='float:left;' class='button' href='/coder/posts/deletePost/$id'>Delete</a> <br><hr><br>";
       }
       $data['tableData'] = $str;
       $data['style'] = $style;
@@ -121,7 +122,8 @@ class Posts extends CI_Controller {
       ."<div style='margin-left:120px; font-size: 22px; line-height: 25px padding:50px;'><pre>".$res['post']."</pre></div><br><br><hr>"
       ."<div style='margin-top:50px; padding:30px;'><b>Author: ".$userinfo['name']."</b>"
       ."<strong><a style='margin-left:20px; text-decoration: none; color: blue;' href='$fbURL'>Facebook Profile</a></strong></div><br><br>"
-      ."<a class='button' style='float:left;' href='/coder/posts/editPost/$id'>Edit</a> <a style='float:left;' class='button' href=''>Delete</a> <br><hr><br>";
+      ."<a class='button' style='float:left;' href='/coder/posts/editPost/$id'>Edit</a>"
+      ." <a style='float:left;' class='button' href='/coder/posts/deletePost/$id'>Delete</a> <br><hr><br>";
 
       $data['postdata'] = $str;
       $data['style'] = $style;
@@ -181,5 +183,28 @@ class Posts extends CI_Controller {
 
   public function deletePost($postid){
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
+    if(!$this->input->post('submit')){
+      $style = "<style>
+      .button {
+        width: 65%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      </style>";
+      $data['style'] = $style;
+      $data['title'] = 'Delete Posts';
+      $this->load->view('view_header',$data);
+      $this->load->view('view_deletepost',$data);
+      $this->load->view('view_footer');
+    }
+    else {
+      $this->postmodel->deleteMyPost($postid);
+      redirect('http://localhost/coder/posts/mypost','refresh');
+    }
   }
 }

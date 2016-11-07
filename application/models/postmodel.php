@@ -34,7 +34,12 @@ class Postmodel extends CI_Model {
     $posttitle = $postdata['posttitle'];
     $post = $postdata['post'];
     $tag = $postdata['tag'];
-    $sql = "UPDATE `post` SET `posttitle`='$id',`post`='$post', `tag`='$tag' WHERE `postid` = $id";
+    $sql = "UPDATE `post` SET `posttitle`='$posttitle',`post`='$post', `tag`='$tag' WHERE `postid` = $id";
+    $this->load->database();
+    $this->db->query($sql);
+  }
+  public function deleteMyPost($postId){
+    $sql = "DELETE FROM `post` WHERE `postid` = $postId";
     $this->load->database();
     $this->db->query($sql);
   }
