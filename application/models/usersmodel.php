@@ -29,7 +29,19 @@ class Usersmodel extends CI_Model {
   }
 
   public function _blockUser($uname){
-    $sql = "UPDATE `users` SET ,`status`='BLOCK' WHERE `username` = $uname";
+    $sql = "UPDATE `users` SET `status`='BLOCK' WHERE `username` = '$uname'";
+    $this->load->database();
+    $this->db->query($sql);
+  }
+
+  public function getBlockedUser(){
+    $sql = "SELECT * FROM `users` WHERE `category` NOT LIKE 'admin' AND `status` LIKE 'block'";
+    $this->load->database();
+    $res = $this->db->query($sql);
+    return $res->result_array();
+  }
+  public function _unblockUser($uname){
+    $sql = "UPDATE `users` SET `status`='OK' WHERE `username` = '$uname'";
     $this->load->database();
     $this->db->query($sql);
   }
