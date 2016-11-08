@@ -10,7 +10,8 @@
       <li><a href="/coder/posts/userBlockedPosts">Block Posts</a></li>
       <li style='float:right'>
         <select name="userinfo" onchange="location = this.value">
-          <option value=''><a class="active" href=""><?php echo ucfirst($this->session->userdata('username'));?></a></option>
+					<option value=''>Option</option>
+          <option value="/coder/adminhome/profile"><a class="active" href=""><?php echo ucfirst($this->session->userdata('username'))." Profile";?></a></option>
           <option value='/coder/logout'>Logout</option>
         </select>
       </li>

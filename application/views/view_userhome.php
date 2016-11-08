@@ -3,7 +3,7 @@
 <div class="position">
 	<nav>
 		<ul>
-			<li><a href="/coder/">Home</a></li>
+			<li><a href="/coder/userhome">Home</a></li>
 			<li><a href="/coder/posts">Posts</a></li>
       <li><a href="/coder/newpost">New Post</a></li>
 			<li><a href="/coder/posts/mypost">My Post</a></li>

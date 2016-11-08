@@ -11,7 +11,7 @@ class Usersmodel extends CI_Model {
     $name = $user['name'];
     $email = $user['email'];
     $pass = $user['password'];
-    $sql = "INSERT INTO `users`(`category`, `username`, `name`, `email`, `password`, `address`, `url`, `status`, `picture`, `country`, `city`) VALUES ('USER','$uname','$name','$email','$pass','','','OK','','','')";
+    $sql = "INSERT INTO `users`(`category`, `username`, `name`, `email`, `password`, `address`, `url`, `status`, `picture`, `country`, `city`) VALUES ('USER','$uname','$name','$email','$pass','','','ACTIVE','','','')";
     $this->load->database();
     $this->db->query($sql);
   }
@@ -22,7 +22,7 @@ class Usersmodel extends CI_Model {
     return $res->row_array();
   }
   public function getAllUser(){
-    $sql = "SELECT * FROM `users` WHERE `category` NOT LIKE 'admin' AND `status` NOT LIKE 'block'";
+    $sql = "SELECT * FROM `users` WHERE `category` NOT LIKE 'admin' AND `status` LIKE 'ACTIVE'";
     $this->load->database();
     $res = $this->db->query($sql);
     return $res->result_array();
@@ -35,13 +35,13 @@ class Usersmodel extends CI_Model {
   }
 
   public function getBlockedUser(){
-    $sql = "SELECT * FROM `users` WHERE `category` NOT LIKE 'admin' AND `status` LIKE 'block'";
+    $sql = "SELECT * FROM `users` WHERE `category` NOT LIKE 'admin' AND `status` LIKE 'BLOCK'";
     $this->load->database();
     $res = $this->db->query($sql);
     return $res->result_array();
   }
   public function _unblockUser($uname){
-    $sql = "UPDATE `users` SET `status`='OK' WHERE `username` = '$uname'";
+    $sql = "UPDATE `users` SET `status`='ACTIVE' WHERE `username` = '$uname'";
     $this->load->database();
     $this->db->query($sql);
   }

@@ -19,4 +19,10 @@
 	</nav>
 </div>
 </div>
-<?php echo $style; echo $string;?>
+<center>
+  <table>
+    <tr>
+      <td></td>
+    </tr>
+  </table>
+</center>

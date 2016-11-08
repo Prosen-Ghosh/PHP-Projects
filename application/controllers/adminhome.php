@@ -121,4 +121,11 @@ class Adminhome extends CI_Controller {
     echo "<script>alert('This User Is Now Unblocked.')</script>";
     redirect('http://localhost/coder/adminhome/getAllBlockedUser','refresh');
   }
+
+  public function profile(){
+    $data['title'] = ucfirst($this->session->userdata('username')).' Profile';
+    $this->load->view('view_header',$data);
+    $this->load->view('view_profile',$data);
+    $this->load->view('view_footer');
+  }
 }

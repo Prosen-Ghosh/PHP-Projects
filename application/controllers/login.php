@@ -24,12 +24,12 @@ class Login extends CI_Controller {
           $this->load->view('view_footer');
           return;
         }
-        if(strtolower($user['category']) === 'user' && strtolower($user['status']) === "ok"){
+        if(strtolower($user['category']) == 'user' && strtolower($user['status']) == "active"){
           $this->session->set_userdata('username',$user['username']);
           $this->session->set_userdata('category',$user['category']);
           redirect('http://localhost/coder/userhome');
         }
-        else if(strtolower($user['category']) === 'admin' && strtolower($user['status']) === "ok"){
+        else if(strtolower($user['category']) == 'admin' && strtolower($user['status']) == "active"){
           $this->session->set_userdata('username',$user['username']);
           $this->session->set_userdata('category',$user['category']);
           redirect('http://localhost/coder/adminhome');
