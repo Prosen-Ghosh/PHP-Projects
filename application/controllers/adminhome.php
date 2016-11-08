@@ -4,10 +4,15 @@ class Adminhome extends CI_Controller {
     parent::__construct();
     $this->load->database();
     $this->load->model('usersmodel');
+    $this->load->helper('file');
   }
   public function index(){
     if($this->session->userdata('username') && strtolower($this->session->userdata('username')) == "admin"){
+      $totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+  		$totalSiteView = intval($totalSiteView);
+
       $data['title'] = 'Home';
+      $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_adminhome');
       $this->load->view('view_footer');
@@ -16,6 +21,9 @@ class Adminhome extends CI_Controller {
   }
 
   public function getAllUsers(){
+    $totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+
     if(!$this->session->userdata('username'))redirect('http://localhost/coder/login');
     $res = $this->usersmodel->getAllUser();
     $style = "<style>
@@ -43,6 +51,7 @@ class Adminhome extends CI_Controller {
       $data['title'] = 'Users List';
       $data['userData'] = $str;
       $data['style'] = $style;
+      $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_usersinfo',$data);
       $this->load->view('view_footer');
@@ -50,6 +59,9 @@ class Adminhome extends CI_Controller {
   }
 
   public function getSpecificUserForBlock($uname){
+    $totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+
     if(!$this->session->userdata('username'))redirect('http://localhost/coder/login');
       $style = "<style>
       .button {
@@ -69,6 +81,7 @@ class Adminhome extends CI_Controller {
     $data['string'] = $string;
     $data['style'] = $style;
     $data['title'] = 'Users';
+    $data['totalPageView'] = $totalSiteView;
     $this->load->view('view_header',$data);
     $this->load->view('view_blockuser',$data);
     $this->load->view('view_footer');
@@ -82,6 +95,9 @@ class Adminhome extends CI_Controller {
   }
 
   public function getAllBlockedUser(){
+    $totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+
     if(!$this->session->userdata('username'))redirect('http://localhost/coder/login');
     $res = $this->usersmodel->getBlockedUser();
     $style = "<style>
@@ -109,6 +125,7 @@ class Adminhome extends CI_Controller {
       $data['title'] = 'Blocked Users List';
       $data['userData'] = $str;
       $data['style'] = $style;
+      $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_usersinfo',$data);
       $this->load->view('view_footer');
@@ -123,7 +140,11 @@ class Adminhome extends CI_Controller {
   }
 
   public function profile(){
+    $totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    
     $data['title'] = ucfirst($this->session->userdata('username')).' Profile';
+    $data['totalPageView'] = $totalSiteView;
     $this->load->view('view_header',$data);
     $this->load->view('view_profile',$data);
     $this->load->view('view_footer');

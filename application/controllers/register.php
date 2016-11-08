@@ -8,11 +8,17 @@ class Register extends CI_Controller {
   }
 
   public function index(){
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
     if(!$this->input->post('submit')){
       $data['title'] = 'Register';
+      $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_register');
-      $this->load->view('view_footer');
+      $this->load->view('view_footer',$data);
     }
     else{
       if($this->form_validation->run('signup')){
@@ -31,9 +37,10 @@ class Register extends CI_Controller {
       }
       else{
         $data['title'] = 'Register';
+        $data['totalPageView'] = $totalSiteView;
         $this->load->view('view_header',$data);
         $this->load->view('view_register');
-        $this->load->view('view_footer');
+        $this->load->view('view_footer',$data);
       }
     }
   }

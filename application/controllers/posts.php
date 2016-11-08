@@ -11,6 +11,11 @@ class Posts extends CI_Controller {
 
   public function index(){
 
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
     //if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     $res = $this->postmodel->getAllPost();
     $str = "";
@@ -24,12 +29,18 @@ class Posts extends CI_Controller {
 
     $data['tableData'] = $str;
     $data['title'] = 'Posts';
+    $data['totalPageView'] = $totalSiteView;
     $this->load->view('view_header',$data);
     $this->load->view('view_posts',$data);
-    $this->load->view('view_footer');
+    $this->load->view('view_footer',$data);
   }
 
   public function showSpecificPost($id){
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
     $res = $this->postmodel->getPost($id);
     $comments = $this->commentmodel->postComment($id);
     if($res['postid'] == $id){
@@ -74,9 +85,10 @@ class Posts extends CI_Controller {
       $data['style'] = $style;
       $data['title'] = 'Posts';
       $data['commentTable'] = $commentTable;
+      $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_specificpost',$data);
-      $this->load->view('view_footer');
+      $this->load->view('view_footer',$data);
     }
     else {
       echo "<script>alert('No Data Found.')</script>";
@@ -85,6 +97,11 @@ class Posts extends CI_Controller {
   }
 
   public function mypost(){
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
     if(!$this->session->userdata('username'))redirect('http://localhost/coder/login');
 
       $style = "<style>
@@ -114,12 +131,18 @@ class Posts extends CI_Controller {
       $data['tableData'] = $str;
       $data['style'] = $style;
       $data['title'] = 'Posts';
+      $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_userpost',$data);
-      $this->load->view('view_footer');
+      $this->load->view('view_footer',$data);
   }
 
   public function showUserSpecificPost($id){
+
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
 
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     $res = $this->postmodel->getPost($id);
@@ -175,16 +198,17 @@ class Posts extends CI_Controller {
       $commentTable.="</table>";
       $commentTable.="<form action='/coder/posts/postNewComment/$id' method='post'><table><tr><td><input type='text' name='comment' value='".set_value('comment')."' placeholder='Enter comment'></td>"
       ."<td style='color:red;'>".form_error('comment')."</td><td><input type='submit' name='submit' value='Submit'></td></tr></table></form>";
-      
+
       $data['postdata'] = $str;
       $data['style'] = $style;
       $data['postdata'] = $str;
       $data['style'] = $style;
       $data['commentTable'] = $commentTable;
       $data['title'] = 'Posts';
+      $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_specificpost',$data);
-      $this->load->view('view_footer');
+      $this->load->view('view_footer',$data);
     }
     else {
       echo "<script>alert('No Data Found.')</script>";
@@ -193,6 +217,11 @@ class Posts extends CI_Controller {
   }
 
   public function editPost($postid){
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     $res = $this->postmodel->getPost($postid);
     if(!$this->input->post('submit')){
@@ -212,9 +241,10 @@ class Posts extends CI_Controller {
       $data['postdata'] = $res;
       $data['style'] = $style;
       $data['title'] = 'Edit Posts';
+      $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_editpost',$data);
-      $this->load->view('view_footer');
+      $this->load->view('view_footer',$data);
     }
     else {
       if($this->form_validation->run('postField')){
@@ -229,14 +259,20 @@ class Posts extends CI_Controller {
       }
       else {
         $data['title'] = 'Edit Posts';
+        $data['totalPageView'] = $totalSiteView;
         $this->load->view('view_header',$data);
         $this->load->view('view_editpost',$data);
-        $this->load->view('view_footer');
+        $this->load->view('view_footer',$data);
       }
     }
   }
 
   public function deletePost($postid){
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     if(!$this->input->post('submit')){
       $style = "<style>
@@ -253,9 +289,10 @@ class Posts extends CI_Controller {
       </style>";
       $data['style'] = $style;
       $data['title'] = 'Delete Posts';
+      $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_deletepost',$data);
-      $this->load->view('view_footer');
+      $this->load->view('view_footer',$data);
     }
     else {
       $this->postmodel->deleteMyPost($postid);
@@ -264,6 +301,11 @@ class Posts extends CI_Controller {
   }
 
   public function userPosts(){
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
     if(!$this->session->userdata('username'))redirect('http://localhost/coder/login');
       $style = "<style>
       .button {
@@ -291,12 +333,17 @@ class Posts extends CI_Controller {
       $data['tableData'] = $str;
       $data['style'] = $style;
       $data['title'] = 'Posts';
+      $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_userpost',$data);
-      $this->load->view('view_footer');
+      $this->load->view('view_footer',$data);
   }
 
   public function specificPostForBlock($id){
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
 
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     $res = $this->postmodel->getPost($id);
@@ -332,9 +379,10 @@ class Posts extends CI_Controller {
       $data['postdata'] = $str;
       $data['style'] = $style;
       $data['title'] = 'Posts';
+      $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_specificpost',$data);
-      $this->load->view('view_footer');
+      $this->load->view('view_footer',$data);
     }
     else {
       echo "<script>alert('No Data Found.')</script>";
@@ -343,6 +391,11 @@ class Posts extends CI_Controller {
   }
 
   public function blockPost($postid){
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
       $this->postmodel->blockUserPost($postid);
       echo "<script>alert('This Pots Is blocked.')</script>";
@@ -350,6 +403,11 @@ class Posts extends CI_Controller {
   }
 
   public function userBlockedPosts(){
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
     if(!$this->session->userdata('username'))redirect('http://localhost/coder/login');
       $style = "<style>
       .button {
@@ -377,12 +435,18 @@ class Posts extends CI_Controller {
       $data['tableData'] = $str;
       $data['style'] = $style;
       $data['title'] = 'Posts';
+      $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_userpost',$data);
-      $this->load->view('view_footer');
+      $this->load->view('view_footer',$data);
   }
 
   public function unblockPost($postid){
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
       $this->postmodel->unBlockUserPost($postid);
       echo "<script>alert('This Pots Is unblocked.')</script>";

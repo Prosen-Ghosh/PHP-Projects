@@ -8,12 +8,18 @@ class Newpost extends CI_Controller {
   }
 
   public function index(){
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     if(!$this->input->post('submit')){
       $data['title'] = 'New Post';
+      $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_newpost');
-      $this->load->view('view_footer');
+      $this->load->view('view_footer',$data);
     }
     else {
       if($this->form_validation->run('postField')){
@@ -32,9 +38,10 @@ class Newpost extends CI_Controller {
       }
       else {
         $data['title'] = 'New Post';
+        $data['totalPageView'] = $totalSiteView;
         $this->load->view('view_header',$data);
         $this->load->view('view_newpost');
-        $this->load->view('view_footer');
+        $this->load->view('view_footer',$data);
       }
     }
   }
