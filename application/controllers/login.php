@@ -24,14 +24,17 @@ class Login extends CI_Controller {
           $this->load->view('view_footer');
           return;
         }
-        $this->session->set_userdata('username',$user['username']);
         if(strtolower($user['category']) === 'user' && strtolower($user['status']) === "ok"){
+          $this->session->set_userdata('username',$user['username']);
+          $this->session->set_userdata('category',$user['category']);
           redirect('http://localhost/coder/userhome');
         }
         else if(strtolower($user['category']) === 'admin' && strtolower($user['status']) === "ok"){
+          $this->session->set_userdata('username',$user['username']);
+          $this->session->set_userdata('category',$user['category']);
           redirect('http://localhost/coder/adminhome');
         }
-        else redirect('http://localhost/coder/blockpage');
+        else redirect('http://localhost/coder/login/blocked');
       }
       else {
         $data['title'] = 'Login';
@@ -41,5 +44,13 @@ class Login extends CI_Controller {
         $this->load->view('view_footer');
       }
     }
+  }
+
+  public function blocked(){
+    $data['title'] = 'Block';
+    $data['errorMsg'] = 'Check Your User Name And Password.';
+    $this->load->view('view_header',$data);
+    $this->load->view('view_blockpage');
+    $this->load->view('view_footer');
   }
 }

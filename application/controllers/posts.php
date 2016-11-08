@@ -173,6 +173,9 @@ class Posts extends CI_Controller {
         .$com['comment']."</div></td></tr>";
       }
       $commentTable.="</table>";
+      $commentTable.="<form action='/coder/posts/postNewComment/$id' method='post'><table><tr><td><input type='text' name='comment' value='".set_value('comment')."' placeholder='Enter comment'></td>"
+      ."<td style='color:red;'>".form_error('comment')."</td><td><input type='submit' name='submit' value='Submit'></td></tr></table></form>";
+      
       $data['postdata'] = $str;
       $data['style'] = $style;
       $data['postdata'] = $str;

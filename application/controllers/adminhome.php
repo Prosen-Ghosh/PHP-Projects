@@ -6,15 +6,13 @@ class Adminhome extends CI_Controller {
     $this->load->model('usersmodel');
   }
   public function index(){
-    if($this->session->userdata('username')){
+    if($this->session->userdata('username') && strtolower($this->session->userdata('username')) == "admin"){
       $data['title'] = 'Home';
       $this->load->view('view_header',$data);
       $this->load->view('view_adminhome');
       $this->load->view('view_footer');
     }
-    else {
-      redirect('http://localhost/coder/login');
-    }
+    else  redirect('http://localhost/coder/login');
   }
 
   public function getAllUsers(){
