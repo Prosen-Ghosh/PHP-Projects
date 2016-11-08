@@ -6,6 +6,8 @@ class Login extends CI_Controller {
     $this->load->model('usersmodel');
   }
   public function index(){
+    if($this->session->userdata('username') && strtolower($this->session->userdata('category')) == 'user')redirect('http://localhost/coder/userhome');
+    if($this->session->userdata('username') && strtolower($this->session->userdata('category')) == 'admin')redirect('http://localhost/coder/adminhome');
     if(!$this->input->post('submit')){
       $data['title'] = 'Login';
       $data['errorMsg'] = '';
