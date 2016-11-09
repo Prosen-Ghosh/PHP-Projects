@@ -545,7 +545,7 @@ class Posts extends CI_Controller {
     <div class='position'>
       <nav>
         <ul>
-          <li><a href='/coder/'>Home</a></li>
+          <li><a href='/coder/adminhome'>Home</a></li>
           <li><a href='/coder/posts/userPosts'>Posts</a></li>
           <li><a href='/coder/adminhome/getAllUsers'>Users</a></li>
           <li><a href='/coder/adminhome/getAllBlockedUser'>Block Users</a></li>
@@ -568,9 +568,10 @@ class Posts extends CI_Controller {
     <div class='logo logoSize'></div>
     <div class='position'>
     	<nav>
-    		<ul style='width: 225px;'>
+    		<ul style='width: 345px;'>
     			<li><a class='active' href='/coder/'>Home</a></li>
     			<li><a href='/coder/posts'>Posts</a></li>
+          <li><a href='/coder/login'>Login</a></li>
     		</ul>
     	</nav>
     </div>

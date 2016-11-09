@@ -7,7 +7,7 @@ class Postmodel extends CI_Model {
     $date = date("Y/m/d");
     $tag = $postdata['tag'];
     $uname = $this->session->userdata('username');
-    $sql = "INSERT INTO `post`(`posttitle`, `post`, `date`, `point`, `tag`, `username` ) VALUES ('$posttitle','$post','$date',0,'$tag',$uname)";
+    $sql = "INSERT INTO `post`(`posttitle`, `post`, `date`, `point`, `tag`, `username`, `state` ) VALUES ('$posttitle','$post','$date',0,'$tag','$uname','ACTIVE')";
     $this->load->database();
     $this->db->query($sql);
   }

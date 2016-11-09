@@ -51,6 +51,7 @@ class Adminhome extends CI_Controller {
       $data['title'] = 'Users List';
       $data['userData'] = $str;
       $data['style'] = $style;
+      $data['nav'] = $this->getAdminNav();
       $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_usersinfo',$data);
@@ -125,6 +126,7 @@ class Adminhome extends CI_Controller {
       $data['title'] = 'Blocked Users List';
       $data['userData'] = $str;
       $data['style'] = $style;
+      $data['nav'] = $this->getAdminNav();
       $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_usersinfo',$data);
@@ -142,11 +144,37 @@ class Adminhome extends CI_Controller {
   public function profile(){
     $totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    
+
     $data['title'] = ucfirst($this->session->userdata('username')).' Profile';
+    $data['nav'] = $this->getAdminNav();
     $data['totalPageView'] = $totalSiteView;
     $this->load->view('view_header',$data);
     $this->load->view('view_profile',$data);
     $this->load->view('view_footer');
+  }
+
+  public function getAdminNav(){
+    $uname = ucfirst($this->session->userdata('username'));
+    return $nav = "<div class='header'>
+    <div class='logo logoSize'></div>
+    <div class='position'>
+      <nav>
+        <ul>
+          <li><a href='/coder/adminhome'>Home</a></li>
+          <li><a href='/coder/posts/userPosts'>Posts</a></li>
+          <li><a href='/coder/adminhome/getAllUsers'>Users</a></li>
+          <li><a href='/coder/adminhome/getAllBlockedUser'>Block Users</a></li>
+          <li><a href='/coder/posts/userBlockedPosts'>Block Posts</a></li>
+          <li style='float:right'>
+            <select name='userinfo' onchange='location = this.value'>
+              <option value=''>Option</option>
+              <option value='/coder/adminhome/profile'>".$uname." Profile</option>
+              <option value='/coder/logout'>Logout</option>
+            </select>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    </div>";
   }
 }

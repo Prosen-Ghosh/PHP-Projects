@@ -3,7 +3,7 @@
 <div class="position">
 	<nav>
 		<ul>
-			<li><a href="/coder/">Home</a></li>
+			<li><a href="/coder/adminhome">Home</a></li>
 			<li><a href="/coder/posts/userPosts">Posts</a></li>
       <li><a href="/coder/adminhome/getAllUsers">Users</a></li>
       <li><a href="/coder/adminhome/getAllBlockedUser">Block Users</a></li>
