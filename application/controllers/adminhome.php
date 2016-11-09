@@ -5,6 +5,7 @@ class Adminhome extends CI_Controller {
     $this->load->database();
     $this->load->model('usersmodel');
     $this->load->helper('file');
+    $this->load->model('postviewmodel');
   }
   public function index(){
     if($this->session->userdata('username') && strtolower($this->session->userdata('username')) == "admin"){
@@ -153,6 +154,36 @@ class Adminhome extends CI_Controller {
     $this->load->view('view_footer');
   }
 
+  public function reports(){
+    $totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    $res = $this->postviewmodel->getTopTenPost();
+    $topTenPost = "<center><h2>Top Ten Post</h2><table border='1'><tr><th>#Post</th><th>Post Title</th> <th>Total Post View</th></tr>";
+    $i = 0;
+    foreach ($res as $r) {
+      $i++;
+      $topTenPost.= "<tr><td>$i</td><td>".$r['posttitle']."</td> <td>".$r['totalpostview']."</td></tr>";
+    }
+    $topTenPost .="</table></center><br />";
+
+    $res = $this->postviewmodel->getTopTenBlogger();
+    $topTenBlogger = "<center><h2>Top Ten Blogger</h2><table border='1'><tr><th>Serial</th><th>Blogger Name</th> <th>Total Visitor</th></th> <th>Total Post</th></tr>";
+    $i = 0;
+    foreach ($res as $r) {
+      $i++;
+      $topTenBlogger.= "<tr><td>$i</td><td>".$r['name']."</td> <td>".$r['visited']."</td><td>".$r['Post']."</td></tr>";
+    }
+    $topTenBlogger .="</table></center><br />";
+
+    $data['nav'] = $this->getAdminNav();
+    $data['totalPageView'] = $totalSiteView;
+    $data['topTenPost'] = $topTenPost;
+    $data['topTenBlogger'] = $topTenBlogger;
+    $data['title'] = "Blog Report";
+    $this->load->view('view_header',$data);
+    $this->load->view('view_report',$data);
+    $this->load->view('view_footer',$data);
+  }
   public function getAdminNav(){
     $uname = ucfirst($this->session->userdata('username'));
     return $nav = "<div class='header'>
@@ -165,6 +196,7 @@ class Adminhome extends CI_Controller {
           <li><a href='/coder/adminhome/getAllUsers'>Users</a></li>
           <li><a href='/coder/adminhome/getAllBlockedUser'>Block Users</a></li>
           <li><a href='/coder/posts/userBlockedPosts'>Block Posts</a></li>
+          <li><a href='/coder/adminhome/reports'>Reports</a></li>
           <li style='float:right'>
             <select name='userinfo' onchange='location = this.value'>
               <option value=''>Option</option>

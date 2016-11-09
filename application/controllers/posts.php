@@ -7,6 +7,7 @@ class Posts extends CI_Controller {
     $this->load->model('postmodel');
     $this->load->model('usersmodel');
     $this->load->model('commentmodel');
+    $this->load->model('postviewmodel');
   }
 
   public function index(){
@@ -43,6 +44,16 @@ class Posts extends CI_Controller {
   }
 
   public function showSpecificPost($id){
+    //post view count
+    $postViewRes = array();
+    $postView = 0;
+    if($this->postviewmodel->checkPostView($id)){
+      $postViewRes = $this->postviewmodel->getPostView($id);
+      $postView = intval($postViewRes['totalpostview']);
+    }
+    if($this->postviewmodel->checkPostView($id))$this->postviewmodel->updatePostView($id,++$postView);
+    else $this->postviewmodel->insertPostView($id,++$postView);
+
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
@@ -61,7 +72,8 @@ class Posts extends CI_Controller {
       $str = "<center><h1>Title: ".$res['posttitle']."</h1></center><hr><br><br>"
       ."<div style='margin-left:120px; font-size: 22px; line-height: 25px padding:50px;'><pre>".$res['post']."</pre></div><br><br><hr>"
       ."<div style='margin-top:50px; padding:30px;'><b>Author: ".$userinfo['name']."</b>"
-      ."<strong><a style='margin-left:20px; text-decoration: none; color: blue;' href='$fbURL'>Facebook Profile</a></strong></div><br><br>";
+      ."<strong><a style='margin-left:20px; text-decoration: none; color: blue;' href='$fbURL'>Facebook Profile</a></strong>"
+      ."<b style='color:red;'> Total Post View: ".$postView."</b></div><br><br>";
 
       $commentTable = "<center><h1>Comments</h1></center><table>";
 
