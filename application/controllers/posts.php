@@ -15,7 +15,7 @@ class Posts extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    //if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
 
     //if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     $res = $this->postmodel->getAllPost();
@@ -24,7 +24,7 @@ class Posts extends CI_Controller {
       $r['post'] = str_replace('<','&lt',$r['post']);
       $r['post'] = str_replace('>','&gt',$r['post']);
       $id = $r['postid'];
-      $str.= $r['posttitle']."<div class='postDiv'><a class='postATag' href='/coder/posts/showSpecificPost/$id'><pre>".$r['post']."</pre></a></div><hr>";
+      $str.= "<b>".$r['posttitle']."</b><div class='postDiv'><a class='postATag' href='/coder/posts/showSpecificPost/$id'><pre>".$r['post']."</pre></a></div><hr>";
       //  ."<div ><a style='margin: 10px;' href=''>Edit</a></td><td> <a style='margin: 10px;' href=''>Delete</a></div>"
     }
     $nav = '';
@@ -259,7 +259,7 @@ class Posts extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    //if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
 
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     $res = $this->postmodel->getPost($postid);
@@ -310,7 +310,7 @@ class Posts extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    //if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
 
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     if(!$this->input->post('submit')){
@@ -488,7 +488,7 @@ class Posts extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    //if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
 
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
       $this->postmodel->unBlockUserPost($postid);
@@ -513,7 +513,7 @@ class Posts extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    //if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
 
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     if(!$this->input->post('submit')){
