@@ -26,9 +26,16 @@ class Posts extends CI_Controller {
       $str.= $r['posttitle']."<div class='postDiv'><a class='postATag' href='/coder/posts/showSpecificPost/$id'><pre>".$r['post']."</pre></a></div><hr>";
       //  ."<div ><a style='margin: 10px;' href=''>Edit</a></td><td> <a style='margin: 10px;' href=''>Delete</a></div>"
     }
-
+    $nav = '';
+    if(!$this->session->userdata('username')){
+      $nav = $this->getGuestNav();
+    }else{
+      if(strtolower($this->session->userdata('category')) == 'admin')$nav = $this->getAdminNav();
+      else $nav = $this->getUserNav();
+    }
     $data['tableData'] = $str;
     $data['title'] = 'Posts';
+    $data['nav'] = $nav;
     $data['totalPageView'] = $totalSiteView;
     $this->load->view('view_header',$data);
     $this->load->view('view_posts',$data);
@@ -81,9 +88,12 @@ class Posts extends CI_Controller {
         margin-left: 35px;
       }
       </style>";
+      $logedin = TRUE;
+      if(!$this->session->userdata('username'))$logedin = FALSE;
       $data['postdata'] = $str;
       $data['style'] = $style;
       $data['title'] = 'Posts';
+      $data['nav'] = ($logedin == FALSE)? $this->getGuestNav() : $this->getUserNav();
       $data['commentTable'] = $commentTable;
       $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
@@ -128,9 +138,17 @@ class Posts extends CI_Controller {
           ."<a class='button' style='float:left;' href='/coder/posts/editPost/$id'>Edit</a>"
           ." <a style='float:left;' class='button' href='/coder/posts/deletePost/$id'>Delete</a> <br><hr><br>";
       }
+      $nav = '';
+      if(!$this->session->userdata('username')){
+        $nav = $this->getGuestNav();
+      }else{
+        if(strtolower($this->session->userdata('category')) == 'admin')$nav = $this->getAdminNav();
+        else $nav = $this->getUserNav();
+      }
       $data['tableData'] = $str;
       $data['style'] = $style;
       $data['title'] = 'Posts';
+      $data['nav'] = $nav;
       $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_userpost',$data);
@@ -199,12 +217,21 @@ class Posts extends CI_Controller {
       $commentTable.="<form action='/coder/posts/postNewComment/$id' method='post'><table><tr><td><input type='text' name='comment' value='".set_value('comment')."' placeholder='Enter comment'></td>"
       ."<td style='color:red;'>".form_error('comment')."</td><td><input type='submit' name='submit' value='Submit'></td></tr></table></form>";
 
+      $nav = '';
+      if(!$this->session->userdata('username')){
+        $nav = $this->getGuestNav();
+      }else{
+        if(strtolower($this->session->userdata('category')) == 'admin')$nav = $this->getAdminNav();
+        else $nav = $this->getUserNav();
+      }
+
       $data['postdata'] = $str;
       $data['style'] = $style;
       $data['postdata'] = $str;
       $data['style'] = $style;
       $data['commentTable'] = $commentTable;
       $data['title'] = 'Posts';
+      $data['nav'] = $nav;
       $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_specificpost',$data);
@@ -333,6 +360,7 @@ class Posts extends CI_Controller {
       $data['tableData'] = $str;
       $data['style'] = $style;
       $data['title'] = 'Posts';
+      $data['nav'] = (strtolower($this->session->userdata('category')) == 'admin') ? $this->getAdminNav() : $this->getUserNav();
       $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_userpost',$data);
@@ -379,6 +407,8 @@ class Posts extends CI_Controller {
       $data['postdata'] = $str;
       $data['style'] = $style;
       $data['title'] = 'Posts';
+      $data['commentTable'] = '';
+      $data['nav'] = $this->getAdminNav();
       $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_specificpost',$data);
@@ -394,7 +424,6 @@ class Posts extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
 
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
       $this->postmodel->blockUserPost($postid);
@@ -406,7 +435,7 @@ class Posts extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    //if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
 
     if(!$this->session->userdata('username'))redirect('http://localhost/coder/login');
       $style = "<style>
@@ -422,6 +451,7 @@ class Posts extends CI_Controller {
           font-weight: bold;
       }
       </style>";
+
       $username = $this->session->userdata('username');
       $res = $this->postmodel->getAllBlockedPost();
       $str = "";
@@ -434,7 +464,8 @@ class Posts extends CI_Controller {
       }
       $data['tableData'] = $str;
       $data['style'] = $style;
-      $data['title'] = 'Posts';
+      $data['title'] = 'Block Posts';
+      $data['nav'] = $this->getAdminNav();
       $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_userpost',$data);
@@ -465,5 +496,107 @@ class Posts extends CI_Controller {
       redirect('http://localhost/coder/posts/showSpecificPost/'.$id,'refresh');
     }
     else redirect('http://localhost/coder/posts/showSpecificPost/'.$id,'refresh');
+  }
+  public function newPost(){
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
+    if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
+    if(!$this->input->post('submit')){
+      $data['title'] = 'New Post';
+      $data['nav'] = $this->getUserNav();
+      $data['totalPageView'] = $totalSiteView;
+      $this->load->view('view_header',$data);
+      $this->load->view('view_newpost');
+      $this->load->view('view_footer',$data);
+    }
+    else {
+      if($this->form_validation->run('postField')){
+        $postdata = array(
+          'posttitle' => $this->input->post('posttitle'),
+          'post' => $this->input->post('post'),
+          'tag' => $this->input->post('tag')
+        );
+
+        $this->postmodel->createNewPost($postdata);
+        echo "<script>
+        alert('Your Post is Posted Seccessfully.');
+        </script>";
+
+        redirect('http://localhost/coder/posts','refresh');
+      }
+      else {
+        $data['title'] = 'New Post';
+        $data['nav'] = $this->getUserNav();
+        $data['totalPageView'] = $totalSiteView;
+        $this->load->view('view_header',$data);
+        $this->load->view('view_newpost',$data);
+        $this->load->view('view_footer',$data);
+      }
+    }
+  }
+
+  public function getAdminNav(){
+    $uname = ucfirst($this->session->userdata('username'));
+    return $nav = "<div class='header'>
+    <div class='logo logoSize'></div>
+    <div class='position'>
+      <nav>
+        <ul>
+          <li><a href='/coder/'>Home</a></li>
+          <li><a href='/coder/posts/userPosts'>Posts</a></li>
+          <li><a href='/coder/adminhome/getAllUsers'>Users</a></li>
+          <li><a href='/coder/adminhome/getAllBlockedUser'>Block Users</a></li>
+          <li><a href='/coder/posts/userBlockedPosts'>Block Posts</a></li>
+          <li style='float:right'>
+            <select name='userinfo' onchange='location = this.value'>
+              <option value=''>Option</option>
+              <option value='/coder/adminhome/profile'>".$uname." Profile</option>
+              <option value='/coder/logout'>Logout</option>
+            </select>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    </div>";
+  }
+
+  public function getGuestNav(){
+    return $nav = "<div class='header'>
+    <div class='logo logoSize'></div>
+    <div class='position'>
+    	<nav>
+    		<ul style='width: 225px;'>
+    			<li><a class='active' href='/coder/'>Home</a></li>
+    			<li><a href='/coder/posts'>Posts</a></li>
+    		</ul>
+    	</nav>
+    </div>
+    </div>";
+  }
+
+  public function getUserNav(){
+    $uname = ucfirst($this->session->userdata('username'));
+    return $nav = "<div class='header'>
+    <div class='logo logoSize'></div>
+    <div class='position'>
+    	<nav>
+    		<ul>
+    			<li><a href='/coder/userhome'>Home</a></li>
+    			<li><a href='/coder/posts'>Posts</a></li>
+          <li><a href='/coder/posts/newpost'>New Post</a></li>
+    			<li><a href='/coder/posts/mypost'>My Post</a></li>
+          <li style='float:right'>
+            <select name='userinfo' onchange='location = this.value'>
+              <option value=''>".$uname." Profile</a></option>
+              <option value='/coder/logout'>Logout</option>
+            </select>
+          </li>
+    		</ul>
+    	</nav>
+    </div>
+    </div>";
   }
 }

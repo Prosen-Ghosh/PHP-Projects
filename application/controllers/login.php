@@ -10,7 +10,7 @@ class Login extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView);
 
     if($this->session->userdata('username') && strtolower($this->session->userdata('category')) == 'user')redirect('http://localhost/coder/userhome');
     if($this->session->userdata('username') && strtolower($this->session->userdata('category')) == 'admin')redirect('http://localhost/coder/adminhome');

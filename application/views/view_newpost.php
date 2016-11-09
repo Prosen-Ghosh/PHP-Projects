@@ -1,3 +1,4 @@
+<?php echo $nav;?>
 <center>
   <form action="" method="post">
     <table>
