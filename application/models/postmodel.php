@@ -60,4 +60,10 @@ class Postmodel extends CI_Model {
     $res = $this->db->query($sql);
     return $res->result_array();
   }
+  public function searchPost($key){
+    $sql = "SELECT * FROM `post` WHERE `posttitle` LIKE '$key%' OR `tag` LIKE '%$key%'";
+    $this->load->database();
+    $res = $this->db->query($sql);
+    return $res->result_array();
+  }
 }

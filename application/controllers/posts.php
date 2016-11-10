@@ -19,6 +19,9 @@ class Posts extends CI_Controller {
 
     //if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     $res = $this->postmodel->getAllPost();
+    if($this->input->post('search')){
+      $res = $this->postmodel->searchPost($this->input->post('searchKey'));
+    }
     $str = "";
     foreach ($res as $r) {
       $r['post'] = str_replace('<','&lt',$r['post']);
@@ -34,9 +37,13 @@ class Posts extends CI_Controller {
       if(strtolower($this->session->userdata('category')) == 'admin')$nav = $this->getAdminNav();
       else $nav = $this->getUserNav();
     }
+    $searchForm = "<form method='post'><table><tr><td><input type='text' name='searchKey' value='' placeholder='Enter Search Key:(Post Tag,Post Title)'></td>"
+    ."<td><input type='submit' name='search' value='Search'></td></tr></table></form>";
+
     $data['tableData'] = $str;
     $data['title'] = 'Posts';
     $data['nav'] = $nav;
+    $data['searchForm'] = $searchForm;
     $data['totalPageView'] = $totalSiteView;
     $this->load->view('view_header',$data);
     $this->load->view('view_posts',$data);
@@ -140,7 +147,11 @@ class Posts extends CI_Controller {
       }
       </style>";
       $username = $this->session->userdata('username');
+
       $res = $this->postmodel->getAllUserPost($username);
+      if($this->input->post('search')){
+        $res = $this->postmodel->searchPost($this->input->post('searchKey'));
+      }
       $str = "";
       foreach ($res as $r) {
         $r['post'] = str_replace('<','&lt',$r['post']);
@@ -157,10 +168,14 @@ class Posts extends CI_Controller {
         if(strtolower($this->session->userdata('category')) == 'admin')$nav = $this->getAdminNav();
         else $nav = $this->getUserNav();
       }
+      $searchForm = "<form method='post'><table><tr><td><input type='text' name='searchKey' value='' placeholder='Enter Search Key:(Post Tag,Post Title)'></td>"
+      ."<td><input type='submit' name='search' value='Search'></td></tr></table></form>";
+
       $data['tableData'] = $str;
       $data['style'] = $style;
       $data['title'] = 'Posts';
       $data['nav'] = $nav;
+      $data['searchForm'] = $searchForm;
       $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_userpost',$data);
@@ -360,7 +375,12 @@ class Posts extends CI_Controller {
       }
       </style>";
       $username = $this->session->userdata('username');
+
       $res = $this->postmodel->getAllPost();
+      if($this->input->post('search')){
+        $res = $this->postmodel->searchPost($this->input->post('searchKey'));
+      }
+
       $str = "";
       foreach ($res as $r) {
         $r['post'] = str_replace('<','&lt',$r['post']);
@@ -369,8 +389,12 @@ class Posts extends CI_Controller {
         $str.= "<b>".$r['posttitle']."</b>"."<div class='postDiv'><a class='postATag' href='/coder/posts/specificPostForBlock/$id'><pre>".$r['post']."</pre></a></div><br>"
           ."<a class='button' style='float:left;' href='/coder/posts/blockPost/$id'>Block This Post.</a>";
       }
+      $searchForm = "<form method='post'><table><tr><td><input type='text' name='searchKey' value='' placeholder='Enter Search Key:(Post Tag,Post Title)'></td>"
+      ."<td><input type='submit' name='search' value='Search'></td></tr></table></form>";
+
       $data['tableData'] = $str;
       $data['style'] = $style;
+      $data['searchForm'] = $searchForm;
       $data['title'] = 'Posts';
       $data['nav'] = (strtolower($this->session->userdata('category')) == 'admin') ? $this->getAdminNav() : $this->getUserNav();
       $data['totalPageView'] = $totalSiteView;
@@ -478,6 +502,7 @@ class Posts extends CI_Controller {
       $data['style'] = $style;
       $data['title'] = 'Block Posts';
       $data['nav'] = $this->getAdminNav();
+      $data['searchForm'] = "";
       $data['totalPageView'] = $totalSiteView;
       $this->load->view('view_header',$data);
       $this->load->view('view_userpost',$data);
@@ -562,6 +587,7 @@ class Posts extends CI_Controller {
           <li><a href='/coder/adminhome/getAllUsers'>Users</a></li>
           <li><a href='/coder/adminhome/getAllBlockedUser'>Block Users</a></li>
           <li><a href='/coder/posts/userBlockedPosts'>Block Posts</a></li>
+          <li><a href='/coder/adminhome/reports'>Reports</a></li>
           <li style='float:right'>
             <select name='userinfo' onchange='location = this.value'>
               <option value=''>Option</option>
