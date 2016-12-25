@@ -26,7 +26,7 @@ $config = array(
     array(
       'field' => 'email',
       'label' => 'Email',
-      'rules' => 'trim|required|valid_email|is_unique[users.username]'
+      'rules' => 'trim|required|valid_email|is_unique[users.email]'
     ),
     array(
       'field' => 'password',
