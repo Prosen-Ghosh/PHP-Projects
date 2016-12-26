@@ -16,7 +16,7 @@
       <table>
         <tr>
           <td class="title">Name: </td>
-          <td><input type="text" name="name" value="<?php echo set_value('name');?>" placeholder="Enter Your Full Name" onblur="isEmpty(this.value,this.name)"></td>
+          <td><input type="text" name="name" value="<?php echo set_value('name');?>" placeholder="Enter Your Full Name" onblur="isName(this.value,this.name)"></td>
           <td class="error" id="name"><?php echo form_error('name');?></td>
         </tr>
         <tr>

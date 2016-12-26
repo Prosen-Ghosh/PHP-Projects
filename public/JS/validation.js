@@ -11,6 +11,8 @@ function isEmpty(str,name){
 }
 
 // for username unique check
+// this function is not working....its return undefined
+
 function isUniqueUser(str){
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -105,6 +107,24 @@ function emailValidation(str,name){
 function passwordValidation(str,name){
   if(isEmpty(str,name))isValidPassword(str,name);
 }
+
 function confrimPasswordValidation(str,name){
   if(isEmpty(str,name))isPasswordMatch(str,name);
+}
+
+function isName(str,name){
+  if(isEmpty(str,name)){
+    var num = false;
+    for(var i = 0; i < str.length; i++){
+      if(str[i] >= '0' && str[i] <= '9'){
+        document.getElementById(name).innerHTML = "Name Can not contain numbers.";
+        num = true;
+        return false;
+      }
+    }
+    if(!num){
+      document.getElementById(name).innerHTML = "";
+      return true;
+    }
+  }
 }
