@@ -2,14 +2,26 @@
 
 class Postmodel extends CI_Model {
   public function createNewPost($postdata){
-    $posttitle = $postdata['posttitle'];
+    /*$posttitle = $postdata['posttitle'];
     $post = $postdata['post'];
     $date = date("Y/m/d");
     $tag = $postdata['tag'];
     $uname = $this->session->userdata('username');
     $sql = "INSERT INTO `post`(`posttitle`, `post`, `date`, `point`, `tag`, `username`, `state` ) VALUES ('$posttitle','$post','$date',0,'$tag','$uname','ACTIVE')";
     $this->load->database();
-    $this->db->query($sql);
+    $this->db->query($sql);*/
+
+    // active record
+    $data = array(
+      'posttitle' => $postdata['posttitle'],
+      'post' => $postdata['post'],
+      'date' => date("Y/m/d"),
+      'point' => 0,
+      'tag' => $postdata['tag'],
+      'username' => $this->session->userdata('username'),
+      'state' => 'ACTIVE'
+    );
+    $this->db->insert('post',$data);
   }
   public function getAllPost(){
     $sql = "SELECT * FROM `post` WHERE `state` NOT LIKE 'BLOCK'";
