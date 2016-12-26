@@ -5,6 +5,8 @@ class Commentmodel extends CI_Model {
     /*$sql = "SELECT * FROM `comment` WHERE `postid` = $postid";
     $this->load->database();
     $res = $this->db->query($sql);*/
+
+    // active record
     $res = $this->db->where('postid',$postid)->get('comment');
     return $res->Result_array();
   }
@@ -16,6 +18,7 @@ class Commentmodel extends CI_Model {
     $this->load->database();
     $this->db->query($sql);*/
 
+    // active record
     $data = array(
       'commentid' => null,
       'comment' = > $commentdata['username'],
