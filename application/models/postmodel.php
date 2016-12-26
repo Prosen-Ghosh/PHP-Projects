@@ -30,9 +30,9 @@ class Postmodel extends CI_Model {
     return $res->result_array();*/
 
     // active record
-    $where = "`state` NOT LIKE 'BLOCK'";
+    $where = "state NOT LIKE 'BLOCK'";
     $res = $this->db->where($where)->get('post');
-    return $res->result->array();
+    return $res->result_array();
   }
   public function getPost($id){
     /*$sql = "SELECT * FROM `post` WHERE postid = $id";

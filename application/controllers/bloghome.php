@@ -9,7 +9,7 @@ class BlogHome extends CI_Controller{
 
 		$data['title'] = "Codes Blog";
 		$data['totalPageView'] = $totalSiteView;
-		$this->load->view("view_header",$data);
+		$this->parser->parse("view_header",$data);
 		$this->load->view("view_bloghome");
 		$this->load->view("view_footer",$data);
 	}

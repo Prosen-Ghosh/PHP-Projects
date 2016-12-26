@@ -21,7 +21,7 @@ class Commentmodel extends CI_Model {
     // active record
     $data = array(
       'commentid' => null,
-      'comment' = > $commentdata['username'],
+      'comment' => $commentdata['username'],
       'username' => $commentdata['username'],
       'postid' => $commentdata['postid']
     );
