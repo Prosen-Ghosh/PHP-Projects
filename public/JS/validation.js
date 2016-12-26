@@ -10,6 +10,33 @@ function isEmpty(str,name){
   }
 }
 
+// for username unique check
+function isUniqueUser(str){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      return this.responseText;
+    }
+    else return false;
+  };
+  xhttp.open("POST", "C:/xampp/htdocs/coder/application/controllers/checkUniqueUser.php", true);
+  xhttp.send("username="+str);
+}
+
+function usernameCheck(str,name){
+  if(isEmpty(str,name)){
+    alert(isUniqueUser(str));
+    if(!isUniqueUser(str)){
+        document.getElementById(name).innerHTML = "User Name Already Taken,Plz Try Another one.";
+        return false;
+    }
+    else {
+      document.getElementById(name).innerHTML = "";
+      return true;
+    }
+  }
+}
+
 // For Email validation check
 
 function isValidEmail(str,name){
@@ -31,7 +58,9 @@ function isValidPassword(str,name){
   var upperAlpha = false;
   var lowerAlpha = false;
   var num = false;
+  var length = false;
   var errorMsg = "";
+  if(len >= 6)length = true;
   for(var i = 0; i < len; i++){
     if(str[i] >= 'a' && str[i] <= 'z')lowerAlpha = true;
     else if(str[i] >= 'A' && str[i] <= 'Z')upperAlpha = true;
@@ -41,7 +70,8 @@ function isValidPassword(str,name){
   if(!lowerAlpha)errorMsg = "Password Must Contain At Least 1 Lowercase character.";
   else if(!upperAlpha)errorMsg = "Password Must Contain At Least 1 Uppercase character.";
   else if(!num)errorMsg = "Password Must Contain At Least 1 Number.";
-  if(!upperAlpha || !lowerAlpha || !num){
+  else if(!length)errorMsg = "Password Must be 6 character long.";
+  if(!upperAlpha || !lowerAlpha || !num || !length){
     document.getElementById(name).innerHTML = errorMsg;
     return false;
   }
@@ -64,4 +94,17 @@ function isPasswordMatch(str,name){
     document.getElementById(name).innerHTML = "";
     return true;
   }
+}
+
+// validation functions
+
+function emailValidation(str,name){
+  if(isEmpty(str,name))isValidEmail(str,name);
+}
+
+function passwordValidation(str,name){
+  if(isEmpty(str,name))isValidPassword(str,name);
+}
+function confrimPasswordValidation(str,name){
+  if(isEmpty(str,name))isPasswordMatch(str,name);
 }

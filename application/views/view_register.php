@@ -21,22 +21,22 @@
         </tr>
         <tr>
           <td class="title">User Name: </td>
-          <td><input type="text" name="userName" value="<?php echo set_value('userName');?>" placeholder="Enter a Unique User Name" onblur="isEmpty(this.value,this.name)"></td>
+          <td><input type="text" name="userName" value="<?php echo set_value('userName');?>" placeholder="Enter a Unique User Name" onblur="usernameCheck(this.value,this.name);"></td>
           <td class="error" id="userName"><?php echo form_error('userName');?></td>
         </tr>
         <tr>
           <td class="title">Email: </td>
-          <td><input type="text" name="email" value="<?php echo set_value('email');?>" placeholder="Enter Email: example@something.com" onblur="isEmpty(this.value,this.name);isValidEmail(this.value,this.name);"></td>
+          <td><input type="text" name="email" value="<?php echo set_value('email');?>" placeholder="Enter Email: example@something.com" onblur="emailValidation(this.value,this.name);"></td>
           <td class="error" id="email"><?php echo form_error('email');?></td>
         </tr>
         <tr>
           <td class="title">Password: </td>
-          <td><input type="password" name="password" value="<?php echo set_value('password');?>" placeholder="Enter Password" onblur="isValidPassword(this.value,this.name); isEmpty(this.value,this.name)"></td>
+          <td><input type="password" name="password" value="<?php echo set_value('password');?>" placeholder="Enter Password" onblur="passwordValidation(this.value,this.name);"></td>
           <td class="error" id="password"><?php echo form_error('password');?></td>
         </tr>
         <tr>
           <td class="title">Confrim Password: </td>
-          <td><input type="password" name="confrimPassword" value="<?php echo set_value('confrimPassword');?>" placeholder="Re-Enter Password" onblur="isEmpty(this.value,this.name)"></td>
+          <td><input type="password" name="confrimPassword" value="<?php echo set_value('confrimPassword');?>" placeholder="Re-Enter Password" onblur="confrimPasswordValidation(this.value,this.name)"></td>
           <td class="error" id="confrimPassword"><?php echo form_error('confrimPassword');?></td>
         </tr>
         <tr>

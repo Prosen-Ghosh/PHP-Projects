@@ -15,6 +15,12 @@ class Usersmodel extends CI_Model {
     $this->load->database();
     $this->db->query($sql);
   }
+  public function getUsername($username){
+    $sql = "SELECT count(*) AS user FROM `users` WHERE username = '$username'";
+    $this->load->database();
+    $res = $this->db->query($sql);
+    return $res->row_array();
+  }
   public function getUserInfo($username){
     $sql = "SELECT * FROM `users` WHERE username = '$username'";
     $this->load->database();
