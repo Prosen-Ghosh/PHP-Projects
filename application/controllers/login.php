@@ -50,7 +50,7 @@ class Login extends CI_Controller {
         $data['title'] = 'Login';
         $data['errorMsg'] = '';
         $data['totalPageView'] = $totalSiteView;
-        $this->load->view('view_header',$data);
+        $this->parser->parse('view_header',$data);
         $this->load->view('view_login',$data);
         $this->load->view('view_footer',$data);
       }
@@ -61,7 +61,7 @@ class Login extends CI_Controller {
     $data['title'] = 'Block';
     $data['totalPageView'] = $totalSiteView;
     $data['errorMsg'] = 'Check Your User Name And Password.';
-    $this->load->view('view_header',$data);
+    $this->parser->parse('view_header',$data);
     $this->load->view('view_blockpage');
     $this->load->view('view_footer',$data);
   }

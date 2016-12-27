@@ -9,7 +9,7 @@ class Userhome extends CI_Controller {
     if($this->session->userdata('username') && strtolower($this->session->userdata('category')) == "user"){
       $data['title'] = 'Home';
       $data['totalPageView'] = $totalSiteView;
-      $this->load->view('view_header',$data);
+      $this->parser->parse('view_header',$data);
       $this->load->view('view_userhome');
       $this->load->view('view_footer',$data);
     }

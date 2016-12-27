@@ -12,7 +12,7 @@
       <li style='float:right'>
         <select name="userinfo" onchange="location = this.value">
 					<option value=''>Option</option>
-          <option value="/coder/adminhome/profile"><a class="active" href=""><?php echo ucfirst($this->session->userdata('username'))." Profile";?></a></option>
+          <option value="/coder/adminhome/profile"><a class="active" href="">{username} Profile</a></option>
           <option value='/coder/logout'>Logout</option>
         </select>
       </li>
@@ -20,4 +20,4 @@
 	</nav>
 </div>
 </div>
-<h1>Welcome <?php echo $this->session->userdata('username');?></h1>
+<h1>Welcome {username}</h1>

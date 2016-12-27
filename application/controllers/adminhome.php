@@ -14,8 +14,9 @@ class Adminhome extends CI_Controller {
 
       $data['title'] = 'Home';
       $data['totalPageView'] = $totalSiteView;
+      $data['username'] = ucfirst($this->session->userdata('username'));
       $this->parser->parse('view_header',$data);
-      $this->load->view('view_adminhome');
+      $this->parser->parse('view_adminhome',$data);
       $this->load->view('view_footer');
     }
     else  redirect('http://localhost/coder/login');
@@ -54,8 +55,9 @@ class Adminhome extends CI_Controller {
       $data['style'] = $style;
       $data['nav'] = $this->getAdminNav();
       $data['totalPageView'] = $totalSiteView;
+      $data['username'] = ucfirst($this->session->userdata('username'));
       $this->parser->parse('view_header',$data);
-      $this->load->view('view_usersinfo',$data);
+      $this->parser->parse('view_usersinfo',$data);
       $this->load->view('view_footer');
     }
   }
@@ -84,8 +86,9 @@ class Adminhome extends CI_Controller {
     $data['style'] = $style;
     $data['title'] = 'Users';
     $data['totalPageView'] = $totalSiteView;
+    $data['username'] = ucfirst($this->session->userdata('username'));
     $this->parser->parse('view_header',$data);
-    $this->load->view('view_blockuser',$data);
+    $this->parser->parse('view_blockuser',$data);
     $this->load->view('view_footer');
   }
 
@@ -129,8 +132,9 @@ class Adminhome extends CI_Controller {
       $data['style'] = $style;
       $data['nav'] = $this->getAdminNav();
       $data['totalPageView'] = $totalSiteView;
+      $data['username'] = ucfirst($this->session->userdata('username'));
       $this->parser->parse('view_header',$data);
-      $this->load->view('view_usersinfo',$data);
+      $this->parser->parse('view_usersinfo',$data);
       $this->load->view('view_footer');
     }
   }
@@ -149,8 +153,9 @@ class Adminhome extends CI_Controller {
     $data['title'] = ucfirst($this->session->userdata('username')).' Profile';
     $data['nav'] = $this->getAdminNav();
     $data['totalPageView'] = $totalSiteView;
+    $data['username'] = ucfirst($this->session->userdata('username'));
     $this->parser->parse('view_header',$data);
-    $this->load->view('view_profile',$data);
+    $this->parser->parse('view_profile',$data);
     $this->load->view('view_footer');
   }
 
@@ -180,8 +185,9 @@ class Adminhome extends CI_Controller {
     $data['topTenPost'] = $topTenPost;
     $data['topTenBlogger'] = $topTenBlogger;
     $data['title'] = "Blog Report";
+    $data['username'] = ucfirst($this->session->userdata('username'));
     $this->parser->parse('view_header',$data);
-    $this->load->view('view_report',$data);
+    $this->parser->parse('view_report',$data);
     $this->load->view('view_footer',$data);
   }
   public function getAdminNav(){

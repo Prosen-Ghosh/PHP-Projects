@@ -16,7 +16,7 @@ class Register extends CI_Controller {
     if(!$this->input->post('submit')){
       $data['title'] = 'Register';
       $data['totalPageView'] = $totalSiteView;
-      $this->load->view('view_header',$data);
+      $this->parser->parse('view_header',$data);
       $this->load->view('view_register');
       $this->load->view('view_footer',$data);
     }
@@ -38,7 +38,7 @@ class Register extends CI_Controller {
       else{
         $data['title'] = 'Register';
         $data['totalPageView'] = $totalSiteView;
-        $this->load->view('view_header',$data);
+        $this->parser->parse('view_header',$data);
         $this->load->view('view_register');
         $this->load->view('view_footer',$data);
       }

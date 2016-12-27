@@ -45,7 +45,7 @@ class Posts extends CI_Controller {
     $data['nav'] = $nav;
     $data['searchForm'] = $searchForm;
     $data['totalPageView'] = $totalSiteView;
-    $this->load->view('view_header',$data);
+    $this->parser->parse('view_header',$data);
     $this->load->view('view_posts',$data);
     $this->load->view('view_footer',$data);
   }
@@ -115,7 +115,7 @@ class Posts extends CI_Controller {
       $data['nav'] = ($logedin == FALSE)? $this->getGuestNav() : $this->getUserNav();
       $data['commentTable'] = $commentTable;
       $data['totalPageView'] = $totalSiteView;
-      $this->load->view('view_header',$data);
+      $this->parser->parse('view_header',$data);
       $this->load->view('view_specificpost',$data);
       $this->load->view('view_footer',$data);
     }
@@ -177,7 +177,7 @@ class Posts extends CI_Controller {
       $data['nav'] = $nav;
       $data['searchForm'] = $searchForm;
       $data['totalPageView'] = $totalSiteView;
-      $this->load->view('view_header',$data);
+      $this->parser->parse('view_header',$data);
       $this->load->view('view_userpost',$data);
       $this->load->view('view_footer',$data);
   }
@@ -260,7 +260,7 @@ class Posts extends CI_Controller {
       $data['title'] = 'Posts';
       $data['nav'] = $nav;
       $data['totalPageView'] = $totalSiteView;
-      $this->load->view('view_header',$data);
+      $this->parser->parse('view_header',$data);
       $this->load->view('view_specificpost',$data);
       $this->load->view('view_footer',$data);
     }
@@ -292,12 +292,15 @@ class Posts extends CI_Controller {
           font-weight: bold;
       }
       </style>";
-      $data['postdata'] = $res;
+    //  $data['postdata'] = $res;
       $data['style'] = $style;
       $data['title'] = 'Edit Posts';
+      $data['posttitle'] = $res['posttitle'];
+      $data['post'] = $res['post'];
+      $data['tag'] = $res['tag'];
       $data['totalPageView'] = $totalSiteView;
-      $this->load->view('view_header',$data);
-      $this->load->view('view_editpost',$data);
+      $this->parser->parse('view_header',$data);
+      $this->parser->parse('view_editpost',$data);
       $this->load->view('view_footer',$data);
     }
     else {
@@ -314,8 +317,8 @@ class Posts extends CI_Controller {
       else {
         $data['title'] = 'Edit Posts';
         $data['totalPageView'] = $totalSiteView;
-        $this->load->view('view_header',$data);
-        $this->load->view('view_editpost',$data);
+        $this->parser->parse('view_header',$data);
+        $this->parser->parse('view_editpost',$data);
         $this->load->view('view_footer',$data);
       }
     }
@@ -344,8 +347,8 @@ class Posts extends CI_Controller {
       $data['style'] = $style;
       $data['title'] = 'Delete Posts';
       $data['totalPageView'] = $totalSiteView;
-      $this->load->view('view_header',$data);
-      $this->load->view('view_deletepost',$data);
+      $this->parser->parse('view_header',$data);
+      $this->parser->parse('view_deletepost',$data);
       $this->load->view('view_footer',$data);
     }
     else {
@@ -398,8 +401,8 @@ class Posts extends CI_Controller {
       $data['title'] = 'Posts';
       $data['nav'] = (strtolower($this->session->userdata('category')) == 'admin') ? $this->getAdminNav() : $this->getUserNav();
       $data['totalPageView'] = $totalSiteView;
-      $this->load->view('view_header',$data);
-      $this->load->view('view_userpost',$data);
+      $this->parser->parse('view_header',$data);
+      $this->parser->parse('view_userpost',$data);
       $this->load->view('view_footer',$data);
   }
 
@@ -446,8 +449,8 @@ class Posts extends CI_Controller {
       $data['commentTable'] = '';
       $data['nav'] = $this->getAdminNav();
       $data['totalPageView'] = $totalSiteView;
-      $this->load->view('view_header',$data);
-      $this->load->view('view_specificpost',$data);
+      $this->parser->parse('view_header',$data);
+      $this->parser->parse('view_specificpost',$data);
       $this->load->view('view_footer',$data);
     }
     else {
@@ -504,8 +507,8 @@ class Posts extends CI_Controller {
       $data['nav'] = $this->getAdminNav();
       $data['searchForm'] = "";
       $data['totalPageView'] = $totalSiteView;
-      $this->load->view('view_header',$data);
-      $this->load->view('view_userpost',$data);
+      $this->parser->parse('view_header',$data);
+      $this->parser->parse('view_userpost',$data);
       $this->load->view('view_footer',$data);
   }
 
@@ -545,7 +548,7 @@ class Posts extends CI_Controller {
       $data['title'] = 'New Post';
       $data['nav'] = $this->getUserNav();
       $data['totalPageView'] = $totalSiteView;
-      $this->load->view('view_header',$data);
+      $this->parser->parse('view_header',$data);
       $this->load->view('view_newpost');
       $this->load->view('view_footer',$data);
     }
@@ -568,8 +571,8 @@ class Posts extends CI_Controller {
         $data['title'] = 'New Post';
         $data['nav'] = $this->getUserNav();
         $data['totalPageView'] = $totalSiteView;
-        $this->load->view('view_header',$data);
-        $this->load->view('view_newpost',$data);
+        $this->parser->parse('view_header',$data);
+        $this->parser->parse('view_newpost',$data);
         $this->load->view('view_footer',$data);
       }
     }

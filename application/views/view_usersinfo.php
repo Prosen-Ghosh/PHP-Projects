@@ -1,3 +1,4 @@
-<?php echo $nav;?>
+{nav}
 <h1>Users Info</h1>
-<?php echo $style; echo $userData;?>
+{style}
+{userData}

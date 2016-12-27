@@ -83,8 +83,8 @@ class Usersmodel extends CI_Model {
 
     // active record
     $where = "`category` NOT LIKE 'admin' AND `status` LIKE 'BLOCK'";
-    $res = $this->db->were($where)->get('users');
-    return $res->result->array();
+    $res = $this->db->where($where)->get('users');
+    return $res->result_array();
   }
   public function _unblockUser($uname){
     /*$sql = "UPDATE `users` SET `status`='ACTIVE' WHERE `username` = '$uname'";

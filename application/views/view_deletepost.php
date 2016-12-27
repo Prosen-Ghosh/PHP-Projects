@@ -1,4 +1,4 @@
-<?php echo $style;?>
+{style}
 <center>
   <form method="post">
     <table>
