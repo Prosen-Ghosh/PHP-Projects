@@ -11,6 +11,6 @@ class BlogHome extends CI_Controller{
 		$data['totalPageView'] = $totalSiteView;
 		$this->parser->parse("view_header",$data);
 		$this->load->view("view_bloghome");
-		$this->load->view("view_footer",$data);
+		$this->parser->parse("view_footer",$data);
 	}
 }

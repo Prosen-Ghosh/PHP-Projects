@@ -18,9 +18,13 @@ class Login extends CI_Controller {
       $data['title'] = 'Login';
       $data['errorMsg'] = '';
       $data['totalPageView'] = $totalSiteView;
+
+      $data['userName'] = "";
+      $data['password'] = "";
+
       $this->parser->parse('view_header',$data);
-      $this->load->view('view_login',$data);
-      $this->load->view('view_footer',$data);
+      $this->parser->parse('view_login',$data);
+      $this->parser->parse('view_footer',$data);
     }
     else {
       if($this->form_validation->run('login')){
@@ -29,9 +33,12 @@ class Login extends CI_Controller {
           $data['title'] = 'Login';
           $data['errorMsg'] = 'Check Your User Name And Password.';
           $data['totalPageView'] = $totalSiteView;
+
+          $data['userName'] = "";
+          $data['password'] = "";
           $this->load->view('view_header',$data);
-          $this->load->view('view_login',$data);
-          $this->load->view('view_footer',$data);
+          $this->parser->parse('view_login',$data);
+          $this->parser->parse('view_footer',$data);
           return;
         }
         if(strtolower($user['category']) == 'user' && strtolower($user['status']) == "active"){
@@ -50,9 +57,11 @@ class Login extends CI_Controller {
         $data['title'] = 'Login';
         $data['errorMsg'] = '';
         $data['totalPageView'] = $totalSiteView;
+        $data['userName'] = form_error('userName');
+        $data['password'] = form_error('password');
         $this->parser->parse('view_header',$data);
-        $this->load->view('view_login',$data);
-        $this->load->view('view_footer',$data);
+        $this->parser->parse('view_login',$data);
+        $this->parser->parse('view_footer',$data);
       }
     }
   }
@@ -63,6 +72,6 @@ class Login extends CI_Controller {
     $data['errorMsg'] = 'Check Your User Name And Password.';
     $this->parser->parse('view_header',$data);
     $this->load->view('view_blockpage');
-    $this->load->view('view_footer',$data);
+    $this->parser->parse('view_footer',$data);
   }
 }

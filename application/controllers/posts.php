@@ -46,8 +46,8 @@ class Posts extends CI_Controller {
     $data['searchForm'] = $searchForm;
     $data['totalPageView'] = $totalSiteView;
     $this->parser->parse('view_header',$data);
-    $this->load->view('view_posts',$data);
-    $this->load->view('view_footer',$data);
+    $this->parser->parse('view_posts',$data);
+    $this->parser->parse('view_footer',$data);
   }
 
   public function showSpecificPost($id){
@@ -116,8 +116,8 @@ class Posts extends CI_Controller {
       $data['commentTable'] = $commentTable;
       $data['totalPageView'] = $totalSiteView;
       $this->parser->parse('view_header',$data);
-      $this->load->view('view_specificpost',$data);
-      $this->load->view('view_footer',$data);
+      $this->parser->parse('view_specificpost',$data);
+      $this->parser->parse('view_footer',$data);
     }
     else {
       echo "<script>alert('No Data Found.')</script>";
@@ -177,9 +177,10 @@ class Posts extends CI_Controller {
       $data['nav'] = $nav;
       $data['searchForm'] = $searchForm;
       $data['totalPageView'] = $totalSiteView;
+      $data['username'] = ucfirst($this->session->userdata('username'));
       $this->parser->parse('view_header',$data);
-      $this->load->view('view_userpost',$data);
-      $this->load->view('view_footer',$data);
+      $this->parser->parse('view_userpost',$data);
+      $this->parser->parse('view_footer',$data);
   }
 
   public function showUserSpecificPost($id){
@@ -261,8 +262,8 @@ class Posts extends CI_Controller {
       $data['nav'] = $nav;
       $data['totalPageView'] = $totalSiteView;
       $this->parser->parse('view_header',$data);
-      $this->load->view('view_specificpost',$data);
-      $this->load->view('view_footer',$data);
+      $this->parser->parse('view_specificpost',$data);
+      $this->parser->parse('view_footer',$data);
     }
     else {
       echo "<script>alert('No Data Found.')</script>";
@@ -299,9 +300,13 @@ class Posts extends CI_Controller {
       $data['post'] = $res['post'];
       $data['tag'] = $res['tag'];
       $data['totalPageView'] = $totalSiteView;
+
+      $data['errPosttitle'] = "";
+      $data['errPost'] = "";
+      $data['errTag'] = "";
       $this->parser->parse('view_header',$data);
       $this->parser->parse('view_editpost',$data);
-      $this->load->view('view_footer',$data);
+      $this->parser->parse('view_footer',$data);
     }
     else {
       if($this->form_validation->run('postField')){
@@ -317,9 +322,14 @@ class Posts extends CI_Controller {
       else {
         $data['title'] = 'Edit Posts';
         $data['totalPageView'] = $totalSiteView;
+
+        $data['errPosttitle'] = form_error('posttitle');
+        $data['errPost'] = form_error('post');
+        $data['errTag'] = form_error('tag');
+
         $this->parser->parse('view_header',$data);
         $this->parser->parse('view_editpost',$data);
-        $this->load->view('view_footer',$data);
+        $this->parser->parse('view_footer',$data);
       }
     }
   }
@@ -349,7 +359,7 @@ class Posts extends CI_Controller {
       $data['totalPageView'] = $totalSiteView;
       $this->parser->parse('view_header',$data);
       $this->parser->parse('view_deletepost',$data);
-      $this->load->view('view_footer',$data);
+      $this->parser->parse('view_footer',$data);
     }
     else {
       $this->postmodel->deleteMyPost($postid);
@@ -401,9 +411,10 @@ class Posts extends CI_Controller {
       $data['title'] = 'Posts';
       $data['nav'] = (strtolower($this->session->userdata('category')) == 'admin') ? $this->getAdminNav() : $this->getUserNav();
       $data['totalPageView'] = $totalSiteView;
+      $data['username'] = $this->session->userdata('username').": List of";
       $this->parser->parse('view_header',$data);
       $this->parser->parse('view_userpost',$data);
-      $this->load->view('view_footer',$data);
+      $this->parser->parse('view_footer',$data);
   }
 
   public function specificPostForBlock($id){
@@ -451,7 +462,7 @@ class Posts extends CI_Controller {
       $data['totalPageView'] = $totalSiteView;
       $this->parser->parse('view_header',$data);
       $this->parser->parse('view_specificpost',$data);
-      $this->load->view('view_footer',$data);
+      $this->parser->parse('view_footer',$data);
     }
     else {
       echo "<script>alert('No Data Found.')</script>";
@@ -507,9 +518,10 @@ class Posts extends CI_Controller {
       $data['nav'] = $this->getAdminNav();
       $data['searchForm'] = "";
       $data['totalPageView'] = $totalSiteView;
+      $data['username'] = $this->session->userdata('username'). ": List Of";
       $this->parser->parse('view_header',$data);
       $this->parser->parse('view_userpost',$data);
-      $this->load->view('view_footer',$data);
+      $this->parser->parse('view_footer',$data);
   }
 
   public function unblockPost($postid){
@@ -548,9 +560,18 @@ class Posts extends CI_Controller {
       $data['title'] = 'New Post';
       $data['nav'] = $this->getUserNav();
       $data['totalPageView'] = $totalSiteView;
+
+      $data['posttitle'] = "";
+      $data['post'] = "";
+      $data['tag'] = "";
+
+      $data['errPosttitle'] = "";
+      $data['errPost'] = "";
+      $data['errTag'] = "";
+
       $this->parser->parse('view_header',$data);
-      $this->load->view('view_newpost');
-      $this->load->view('view_footer',$data);
+      $this->parser->parse('view_newpost',$data);
+      $this->parser->parse('view_footer',$data);
     }
     else {
       if($this->form_validation->run('postField')){
@@ -571,9 +592,18 @@ class Posts extends CI_Controller {
         $data['title'] = 'New Post';
         $data['nav'] = $this->getUserNav();
         $data['totalPageView'] = $totalSiteView;
+
+        $data['posttitle'] = set_value('posttitle');
+        $data['post'] = set_value('post');
+        $data['tag'] = set_value('tag');
+
+        $data['errPosttitle'] = form_error('posttitle');
+        $data['errPost'] = form_error('post');
+        $data['errTag'] = form_error('tag');
+
         $this->parser->parse('view_header',$data);
         $this->parser->parse('view_newpost',$data);
-        $this->load->view('view_footer',$data);
+        $this->parser->parse('view_footer',$data);
       }
     }
   }

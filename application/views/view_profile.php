@@ -1,4 +1,4 @@
-<?php echo $nav;?>
+{nav}
 <center>
   <table>
     <tr>

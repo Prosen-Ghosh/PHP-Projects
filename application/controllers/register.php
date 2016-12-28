@@ -16,9 +16,21 @@ class Register extends CI_Controller {
     if(!$this->input->post('submit')){
       $data['title'] = 'Register';
       $data['totalPageView'] = $totalSiteView;
+
+      $data['name'] = "";
+      $data['userName'] = "";
+      $data['email'] = "";
+      $data['password'] = "";
+      $data['confrimPassword'] = "";
+
+      $data['errName'] = '';
+      $data['errUserName'] = "";
+      $data['errEmail'] = "";
+      $data['errPassword'] = "";
+      $data['errConfrimPassword'] = "";
       $this->parser->parse('view_header',$data);
-      $this->load->view('view_register');
-      $this->load->view('view_footer',$data);
+      $this->parser->parse('view_register',$data);
+      $this->parser->parse('view_footer',$data);
     }
     else{
       if($this->form_validation->run('signup')){
@@ -38,9 +50,21 @@ class Register extends CI_Controller {
       else{
         $data['title'] = 'Register';
         $data['totalPageView'] = $totalSiteView;
+
+        $data['name'] = set_value('name');
+        $data['userName'] = set_value('userName');
+        $data['email'] = set_value('email');
+        $data['password'] = set_value('password');
+        $data['confrimPassword'] = set_value('confrimPassword');
+
+        $data['errName'] = form_error('name');
+        $data['errUserName'] = form_error('userName');
+        $data['errEmail'] = form_error('email');
+        $data['errPassword'] = form_error('password');
+        $data['errConfrimPassword'] = form_error('confrimPassword');
         $this->parser->parse('view_header',$data);
-        $this->load->view('view_register');
-        $this->load->view('view_footer',$data);
+        $this->parser->parse('view_register',$data);
+        $this->parser->parse('view_footer',$data);
       }
     }
   }

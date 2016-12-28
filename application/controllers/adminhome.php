@@ -17,7 +17,7 @@ class Adminhome extends CI_Controller {
       $data['username'] = ucfirst($this->session->userdata('username'));
       $this->parser->parse('view_header',$data);
       $this->parser->parse('view_adminhome',$data);
-      $this->load->view('view_footer');
+      $this->parser->parse('view_footer',$data);
     }
     else  redirect('http://localhost/coder/login');
   }
@@ -58,7 +58,7 @@ class Adminhome extends CI_Controller {
       $data['username'] = ucfirst($this->session->userdata('username'));
       $this->parser->parse('view_header',$data);
       $this->parser->parse('view_usersinfo',$data);
-      $this->load->view('view_footer');
+      $this->parser->parse('view_footer',$data);
     }
   }
 
@@ -89,7 +89,7 @@ class Adminhome extends CI_Controller {
     $data['username'] = ucfirst($this->session->userdata('username'));
     $this->parser->parse('view_header',$data);
     $this->parser->parse('view_blockuser',$data);
-    $this->load->view('view_footer');
+    $this->parser->parse('view_footer',$data);
   }
 
   function blockUser($uname){
@@ -135,7 +135,7 @@ class Adminhome extends CI_Controller {
       $data['username'] = ucfirst($this->session->userdata('username'));
       $this->parser->parse('view_header',$data);
       $this->parser->parse('view_usersinfo',$data);
-      $this->load->view('view_footer');
+      $this->parser->parse('view_footer',$data);
     }
   }
 
@@ -156,7 +156,7 @@ class Adminhome extends CI_Controller {
     $data['username'] = ucfirst($this->session->userdata('username'));
     $this->parser->parse('view_header',$data);
     $this->parser->parse('view_profile',$data);
-    $this->load->view('view_footer');
+    $this->parser->parse('view_footer',$data);
   }
 
   public function reports(){
@@ -188,7 +188,7 @@ class Adminhome extends CI_Controller {
     $data['username'] = ucfirst($this->session->userdata('username'));
     $this->parser->parse('view_header',$data);
     $this->parser->parse('view_report',$data);
-    $this->load->view('view_footer',$data);
+    $this->parser->parse('view_footer',$data);
   }
   public function getAdminNav(){
     $uname = ucfirst($this->session->userdata('username'));

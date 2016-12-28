@@ -1,4 +1,4 @@
-<?php echo $nav;?>
-<?php echo $searchForm;?>
+{nav}
+{searchForm}
 <center><h1>All Post.</h1></center><hr>
-<?php echo $tableData;
+{tableData}

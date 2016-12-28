@@ -17,16 +17,16 @@
         <tr>
           <td class="title">User Name: </td>
           <td><input type="text" name="userName" value="" placeholder="Enter Your User Name Or Email"></td>
-          <td class="error"><?php echo form_error('userName');?></td>
+          <td class="error">{userName}</td>
         </tr>
         <tr>
           <td class="title">Password: </td>
           <td><input type="password" name="password" value="" placeholder="Enter Your Password."></td>
-          <td class="error"><?php echo form_error('password');?></td>
+          <td class="error">{password}</td>
         </tr>
         <tr>
           <td></td>
-          <td class="error"><?php echo $errorMsg;?></td>
+          <td class="error">{errorMsg}</td>
         </tr>
         <tr>
           <td></td>
