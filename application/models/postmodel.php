@@ -109,7 +109,7 @@ class Postmodel extends CI_Model {
     $res = $this->db->query($sql);*/
 
     // active record
-    $where = "`posttitle` LIKE '$key%' OR `tag` LIKE '%$key%'";
+    $where = "`posttitle` LIKE '%$key%' OR `tag` LIKE '%$key%'";
     $res = $this->db->where($where)->get('post');
     return $res->result_array();
   }

@@ -36,9 +36,8 @@ class Usersmodel extends CI_Model {
     $this->db->insert('users',$data);
   }
   public function getUsername($username){
-    $sql = "SELECT count(*) AS user FROM `users` WHERE username = '$username'";
-    $this->load->database();
-    $res = $this->db->query($sql);
+
+    $res = $this->db->select("count(*) AS user")->where('username',$username)->get('users');
     return $res->row_array();
   }
   public function getUserInfo($username){
@@ -50,7 +49,9 @@ class Usersmodel extends CI_Model {
     // active record
     $res = $this->db->where('username', $username)->get('users');
     return $res->row_array();
-
+  }
+  public function updateUser($data,$username){
+    $this->db->where('username', $username)->update('users',$data);
   }
   public function getAllUser(){
     /*$sql = "SELECT * FROM `users` WHERE `category` NOT LIKE 'admin' AND `status` LIKE 'ACTIVE'";

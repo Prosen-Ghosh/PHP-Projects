@@ -67,6 +67,10 @@ class Login extends CI_Controller {
   }
 
   public function blocked(){
+    $this->load->helper('file');
+		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
+		$totalSiteView = intval($totalSiteView);
+    
     $data['title'] = 'Block';
     $data['totalPageView'] = $totalSiteView;
     $data['errorMsg'] = 'Check Your User Name And Password.';

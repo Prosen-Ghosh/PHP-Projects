@@ -21,12 +21,12 @@
         </tr>
         <tr>
           <td class="title">User Name: </td>
-          <td><input type="text" name="userName" value="{userName}" placeholder="Enter a Unique User Name" onblur="usernameCheck(this.value,this.name);"></td>
+          <td><input type="text" name="userName" value="{userName}" placeholder="Enter a Unique User Name" onblur="isEmpty(this.value,this.name)" ></td>
           <td class="error" id="userName">{errUserName}</td>
         </tr>
         <tr>
           <td class="title">Email: </td>
-          <td><input type="text" name="email" value="{email}" placeholder="Enter Email: example@something.com" onblur="emailValidation(this.value,this.name);"></td>
+          <td><input type="text" name="email" value="{email}" placeholder="Enter Email: example@something.com" onblur="emailValidation(this.value,this.name)"></td>
           <td class="error" id="email">{errEmail}</td>
         </tr>
         <tr>
@@ -48,3 +48,46 @@
     <label class="title">I All Ready have An <a href="/coder/login">Account</a></label>
   </div>
 </center>
+
+<script>
+function isEmpty(str,name){
+  if(!str){
+    document.getElementById(name).innerHTML = name + " Feild can not be empty.";
+    return false;
+  }
+  else {
+    document.getElementById(name).innerHTML = "";
+    return true;
+  }
+}
+function isUniqueUser(str){
+  alert(str + 'U');
+  var flag = false;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+		alert('f');
+    if (this.readyState == 4 && this.status == 200) {
+      alert(this.responseText);
+      flag = this.responseText;
+    }
+    else return flag;
+  };
+  xhttp.open("GET", "C:/xampp/htdocs/coder/application/controllers/checkUniqueUser.php?username="+str, true);
+  xhttp.send();
+}
+
+function userNameValidation(str,name){
+  alert(str+" "+name);
+  if(isEmpty(str,name)){
+    //alert(isUniqueUser(str));
+    if(!isUniqueUser(str)){
+        document.getElementById(name).innerHTML = "User Name Already Taken,Plz Try Another one.";
+        return false;
+    }
+    else {
+      document.getElementById(name).innerHTML = "";
+      return true;
+    }
+  }
+}
+</script>

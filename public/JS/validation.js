@@ -13,32 +13,6 @@ function isEmpty(str,name){
 // for username unique check
 // this function is not working....its return undefined
 
-function isUniqueUser(str){
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      return this.responseText;
-    }
-    else return false;
-  };
-  xhttp.open("POST", "C:/xampp/htdocs/coder/application/controllers/checkUniqueUser.php", true);
-  xhttp.send("username="+str);
-}
-
-function usernameCheck(str,name){
-  if(isEmpty(str,name)){
-    alert(isUniqueUser(str));
-    if(!isUniqueUser(str)){
-        document.getElementById(name).innerHTML = "User Name Already Taken,Plz Try Another one.";
-        return false;
-    }
-    else {
-      document.getElementById(name).innerHTML = "";
-      return true;
-    }
-  }
-}
-
 // For Email validation check
 
 function isValidEmail(str,name){

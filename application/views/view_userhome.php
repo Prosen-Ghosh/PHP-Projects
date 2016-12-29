@@ -9,7 +9,8 @@
 			<li><a href="/coder/posts/mypost">My Post</a></li>
       <li style='float:right'>
         <select name="userinfo" onchange="location = this.value">
-          <option value=''><a class="active" href="">{username}</a></option>
+          <option value='/coder/userhome/profile'><a class="active" href="">{username}</a></option>
+					<option value='/coder/userhome/profile'><a class="active" href="">{username} Profile</a></option>
           <option value='/coder/logout'>Logout</option>
         </select>
       </li>
