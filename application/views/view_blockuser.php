@@ -19,5 +19,5 @@
 	</nav>
 </div>
 </div>
-{$style}
-{$string}
+{style}
+{string}
