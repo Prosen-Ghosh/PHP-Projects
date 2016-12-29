@@ -10,7 +10,10 @@ class Login extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView);
+    if(!$this->session->userdata('login')){
+      $this->session->set_userdata('login','login');
+      write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView);
+    }
 
     if($this->session->userdata('username') && strtolower($this->session->userdata('category')) == 'user')redirect('http://localhost/coder/userhome');
     if($this->session->userdata('username') && strtolower($this->session->userdata('category')) == 'admin')redirect('http://localhost/coder/adminhome');
@@ -70,7 +73,7 @@ class Login extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    
+
     $data['title'] = 'Block';
     $data['totalPageView'] = $totalSiteView;
     $data['errorMsg'] = 'Check Your User Name And Password.';

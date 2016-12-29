@@ -5,7 +5,11 @@ class BlogHome extends CI_Controller{
 		$this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
+		if(!$this->session->userdata('bloghome')){
+			$this->session->set_userdata('bloghome','bloghome');
+	    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+		}
 
 		$data['title'] = "Codes Blog";
 		$data['totalPageView'] = $totalSiteView;

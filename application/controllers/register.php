@@ -11,7 +11,10 @@ class Register extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    if(!$this->session->userdata('Register')){
+      $this->session->set_userdata('Register','Register');
+      if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    }
 
     if(!$this->input->post('submit')){
       $data['title'] = 'Register';

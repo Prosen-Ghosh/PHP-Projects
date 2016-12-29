@@ -52,19 +52,31 @@ class Posts extends CI_Controller {
 
   public function showSpecificPost($id){
     //post view count
-    $postViewRes = array();
-    $postView = 0;
-    if($this->postviewmodel->checkPostView($id)){
-      $postViewRes = $this->postviewmodel->getPostView($id);
-      $postView = intval($postViewRes['totalpostview']);
-    }
-    if($this->postviewmodel->checkPostView($id))$this->postviewmodel->updatePostView($id,++$postView);
-    else $this->postviewmodel->insertPostView($id,++$postView);
-
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+
+
+    if(!$this->session->userdata($id)){
+      $this->session->set_userdata($id,$id);
+      if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+      $postViewRes = array();
+      $postView = 0;
+      if($this->postviewmodel->checkPostView($id)){
+        $postViewRes = $this->postviewmodel->getPostView($id);
+        $postView = intval($postViewRes['totalpostview']);
+      }
+      if($this->postviewmodel->checkPostView($id))$this->postviewmodel->updatePostView($id,++$postView);
+      else $this->postviewmodel->insertPostView($id,++$postView);
+    }
+    else{
+      $postViewRes = array();
+      $postView = 0;
+      if($this->postviewmodel->checkPostView($id)){
+        $postViewRes = $this->postviewmodel->getPostView($id);
+        $postView = intval($postViewRes['totalpostview']);
+      }
+    }
 
     $res = $this->postmodel->getPost($id);
     $comments = $this->commentmodel->postComment($id);
@@ -129,7 +141,10 @@ class Posts extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    if(!$this->session->userdata('mypost')){
+      $this->session->set_userdata('mypost','mypost');
+      if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    }
 
     if(!$this->session->userdata('username'))redirect('http://localhost/coder/login');
 
@@ -188,7 +203,10 @@ class Posts extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    if(!$this->session->userdata($id)){
+      $this->session->set_userdata($id,$id);
+      if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    }
 
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     $res = $this->postmodel->getPost($id);
@@ -371,7 +389,10 @@ class Posts extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    if(!$this->session->userdata('userposts')){
+      $this->session->set_userdata('userposts','userposts');
+      if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    }
 
     if(!$this->session->userdata('username'))redirect('http://localhost/coder/login');
       $style = "<style>
@@ -421,7 +442,10 @@ class Posts extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
-    if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    if(!$this->session->userdata($id)){
+      $this->session->set_userdata($id,$id);
+      if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+    }
 
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     $res = $this->postmodel->getPost($id);
