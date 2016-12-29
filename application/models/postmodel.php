@@ -30,8 +30,13 @@ class Postmodel extends CI_Model {
     return $res->result_array();*/
 
     // active record
-    $where = "state NOT LIKE 'BLOCK'";
+    $where = "state NOT LIKE 'BLOCK' AND username != '".$this->session->userdata('username')."'";
     $res = $this->db->where($where)->get('post');
+    return $res->result_array();
+  }
+
+  public function getAllPostID(){
+    $res = $this->db->select('postid')->get('post');
     return $res->result_array();
   }
   public function getPost($id){
@@ -92,7 +97,7 @@ class Postmodel extends CI_Model {
     $this->db->query($sql);*/
 
     // active record
-    $this->db->where('postid',$postId)->update('post',array('state'=>'OK'));
+    $this->db->where('postid',$postId)->update('post',array('state'=>'ACTIVE'));
   }
   public function getAllBlockedPost(){
     /*$sql = "SELECT * FROM `post` WHERE `state` LIKE 'BLOCK'";

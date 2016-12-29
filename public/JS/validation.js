@@ -10,9 +10,6 @@ function isEmpty(str,name){
   }
 }
 
-// for username unique check
-// this function is not working....its return undefined
-
 // For Email validation check
 
 function isValidEmail(str,name){
@@ -90,7 +87,7 @@ function isName(str,name){
   if(isEmpty(str,name)){
     var num = false;
     for(var i = 0; i < str.length; i++){
-      if(str[i] >= '0' && str[i] <= '9'){
+      if(str[i] >= '0' && str[i] <= '9' || str[i] != ' '){
         document.getElementById(name).innerHTML = "Name Can not contain numbers.";
         num = true;
         return false;

@@ -203,11 +203,32 @@ class Posts extends CI_Controller {
     $this->load->helper('file');
 		$totalSiteView = read_file('C:\xampp\htdocs\coder\application\doc\pageview.txt');
 		$totalSiteView = intval($totalSiteView);
+    //if(!$this->session->userdata($id)){
+    //  $this->session->set_userdata($id,$id);
+    //  if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+  //  }
+    //------------------
     if(!$this->session->userdata($id)){
       $this->session->set_userdata($id,$id);
       if(!write_file('C:\xampp\htdocs\coder\application\doc\pageview.txt',++$totalSiteView));
+      $postViewRes = array();
+      $postView = 0;
+      if($this->postviewmodel->checkPostView($id)){
+        $postViewRes = $this->postviewmodel->getPostView($id);
+        $postView = intval($postViewRes['totalpostview']);
+      }
+      if($this->postviewmodel->checkPostView($id))$this->postviewmodel->updatePostView($id,++$postView);
+      else $this->postviewmodel->insertPostView($id,++$postView);
     }
-
+    else{
+      $postViewRes = array();
+      $postView = 0;
+      if($this->postviewmodel->checkPostView($id)){
+        $postViewRes = $this->postviewmodel->getPostView($id);
+        $postView = intval($postViewRes['totalpostview']);
+      }
+    }
+    //---------------
     if(!$this->session->userdata('username')) redirect('http://localhost/coder/login');
     $res = $this->postmodel->getPost($id);
     $comments = $this->commentmodel->postComment($id);
@@ -245,7 +266,8 @@ class Posts extends CI_Controller {
       $str = "<center><h1>Title: ".$res['posttitle']."</h1></center><hr><br><br>"
       ."<div style='margin-left:120px; font-size: 22px; line-height: 25px padding:50px;'><pre>".$res['post']."</pre></div><br><br><hr>"
       ."<div style='margin-top:50px; padding:30px;'><b>Author: ".$userinfo['name']."</b>"
-      ."<strong><a style='margin-left:20px; text-decoration: none; color: blue;' href='$fbURL'>Facebook Profile</a></strong></div><br><br>"
+      ."<strong><a style='margin-left:20px; text-decoration: none; color: blue;' href='$fbURL'>Facebook Profile</a></strong></div>"
+      ."<b style='color:red;'> Total Post View: ".$postView."</b></div><br><br>"
       ."<a class='button' style='float:left;' href='/coder/posts/editPost/$id'>Edit</a>"
       ." <a style='float:left;' class='button' href='/coder/posts/deletePost/$id'>Delete</a> <br><hr><br>";
 
